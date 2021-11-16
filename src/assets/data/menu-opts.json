@@ -1,0 +1,27 @@
+[
+  {
+    "icon": "briefcase-outline",
+    "name": "Expedientes",
+    "redirecTo": ""
+  },
+  {
+    "icon": "time-outline",
+    "name": "Tareas",
+    "redirecTo": ""
+  },
+  {
+    "icon": "people-outline",
+    "name": "Clientes",
+    "redirecTo": ""
+  },
+  {
+    "icon": "share-social-outline",
+    "name": "Contactos",
+    "redirecTo": ""
+  },
+  {
+    "icon": "settings-outline",
+    "name": "Configuraciones",
+    "redirecTo": ""
+  }
+]
