@@ -2,26 +2,26 @@
   {
     "icon": "briefcase-outline",
     "name": "Expedientes",
-    "redirecTo": ""
+    "redirectTo": ""
   },
   {
     "icon": "time-outline",
     "name": "Tareas",
-    "redirecTo": ""
+    "redirectTo": ""
   },
   {
     "icon": "people-outline",
     "name": "Clientes",
-    "redirecTo": ""
+    "redirectTo": ""
   },
   {
     "icon": "share-social-outline",
     "name": "Contactos",
-    "redirecTo": ""
+    "redirectTo": "/contactos"
   },
   {
     "icon": "settings-outline",
     "name": "Configuraciones",
-    "redirecTo": ""
+    "redirectTo": ""
   }
 ]
