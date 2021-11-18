@@ -1,13 +1,10 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>Contactos</ion-title>
-  </ion-toolbar>
+<app-header-menu titulo="Contactos"></app-header-menu>
+
   <ion-searchbar placeholder="Buscar contacto"
                  inputmode="text"
                  (ionChange)="onSearchChange($event)"
                  debounce="250"
                  animated></ion-searchbar>
-</ion-header>
 
 <ion-content>
   <ion-list>

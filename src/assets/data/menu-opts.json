@@ -1,5 +1,10 @@
 [
   {
+    "icon": "speedometer-outline",
+    "name": "Dashboard",
+    "redirectTo": "/home"
+  },
+  {
     "icon": "briefcase-outline",
     "name": "Expedientes",
     "redirectTo": ""

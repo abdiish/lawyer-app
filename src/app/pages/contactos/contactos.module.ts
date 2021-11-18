@@ -8,6 +8,7 @@ import { ContactosPageRoutingModule } from './contactos-routing.module';
 
 import { ContactosPage } from './contactos.page';
 import { PipesModule } from '../../pipes/pipes.module';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PipesModule } from '../../pipes/pipes.module';
     FormsModule,
     IonicModule,
     ContactosPageRoutingModule,
-    PipesModule
+    PipesModule,
+    ComponentsModule
   ],
   declarations: [ContactosPage]
 })
