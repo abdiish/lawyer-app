@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'expedientes',
     loadChildren: () => import('./pages/expedientes/expedientes.module').then( m => m.ExpedientesPageModule)
+  },  {
+    path: 'clientes',
+    loadChildren: () => import('./pages/clientes/clientes.module').then( m => m.ClientesPageModule)
   },
+
 ];
 
 @NgModule({

@@ -4,7 +4,7 @@ import { IonList } from '@ionic/angular';
 import { Contacto } from '../../interfaces/cargar-contactos';
 import { ModalController } from '@ionic/angular';
 import { ModalContactoPage } from './modal-contacto/modal-contacto.page';
-import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-contactos',
   templateUrl: './contactos.page.html',

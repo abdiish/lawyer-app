@@ -17,7 +17,7 @@
   {
     "icon": "people-outline",
     "name": "Clientes",
-    "redirectTo": ""
+    "redirectTo": "/clientes"
   },
   {
     "icon": "share-social-outline",
