@@ -7,7 +7,7 @@
   {
     "icon": "briefcase-outline",
     "name": "Expedientes",
-    "redirectTo": ""
+    "redirectTo": "/expedientes"
   },
   {
     "icon": "time-outline",

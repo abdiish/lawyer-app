@@ -1,0 +1,41 @@
+<app-header-menu></app-header-menu>
+
+<ion-searchbar placeholder="Buscar expediente"
+               inputmode="text"
+               (ionChange)="onSearchChange($event)"
+               debounce="250"
+               animated></ion-searchbar>
+
+<ion-content>
+  <ion-list *ngFor="let judgment of judgments">
+    <ion-card>
+      <ion-item color="primary">
+        <ion-icon slot="end" name="add"></ion-icon>
+        <ion-label>{{ judgment.nombreExpediente }}</ion-label>
+      </ion-item>
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h1>${{ judgment.cuantia | number: '1.2-2' }}</h1>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-text color="primary">
+              <h1>{{ judgment.numExpediente }}</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-chip>
+          <ion-avatar>
+            <img src="../../../assets/no-img.png"/>
+          </ion-avatar>
+          <ion-label color="medium">Nombre del cliente</ion-label>
+        </ion-chip>
+        <ion-chip>
+          <ion-label color="medium">{{ judgment.tipo }}</ion-label>
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
