@@ -8,15 +8,15 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let contacto of contactos | filtro: textoBuscar: 'nombre'">
+    <ion-item-sliding *ngFor="let contacto of contactos | filtro: textoBuscar: 'nombre' | filtro: tipo: 'tipo'">
 
-      <ion-item >
+      <ion-item detail="true" (click)="itemClick(contacto)">
         <ion-avatar slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+          <img src="../../../assets/no-img.png"/>
         </ion-avatar>
         <ion-label>
           <h3>{{ contacto.nombre }}</h3>
-          <ion-badge color="primary" mode="ios">{{ contacto.tipo }}</ion-badge>
+          <ion-badge color="tertiary">{{ contacto.tipo }}</ion-badge>
         </ion-label>
         <ion-label slot="end" class="ion-text-end text-small">
           <!-- <p>{{ contacto.email }}</p> -->
@@ -33,3 +33,18 @@
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+ <!-- Icon top -->
+ <ion-segment value="Abogado Contraparte" (ionChange)="segmentChanged($event)" color="dark">
+  <ion-segment-button value="Abogado Contraparte">
+    <ion-label>Abogados</ion-label>
+    <ion-icon name="people-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="Institución Judicial">
+    <ion-label>Instituciones</ion-label>
+    <ion-icon name="business-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="Despacho Legal">
+    <ion-label>Despachos</ion-label>
+    <ion-icon name="map-outline"></ion-icon>
+  </ion-segment-button>
+</ion-segment>

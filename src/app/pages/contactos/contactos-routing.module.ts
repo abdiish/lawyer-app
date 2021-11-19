@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ContactosPage
+  },
+  {
+    path: 'modal-contacto',
+    loadChildren: () => import('./modal-contacto/modal-contacto.module').then( m => m.ModalContactoPageModule)
   }
 ];
 
