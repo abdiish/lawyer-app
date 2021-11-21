@@ -15,6 +15,7 @@ export class ExpedientesService {
 
   constructor(private http: HttpClient) { }
 
+  // Obtener expedientes
   getExpedientes() {
 
     const url = `${ URL }/expedientes`;
@@ -40,6 +41,15 @@ export class ExpedientesService {
           judgments
         }
     }));
+  }
+
+  // Obtener expediente por su ID
+  getExpediente(id: string) {
+
+    const url = `${ URL }/expedientes/${ id }`;
+
+    return this.http.get(url).pipe(map((resp: { ok: boolean, numJudgment: Expediente }) => resp.numJudgment));
+
   }
 
 }

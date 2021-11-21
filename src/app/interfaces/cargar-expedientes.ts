@@ -6,8 +6,8 @@ export interface CargarExpediente {
 
 export interface Expediente {
 
-  nombreExpediente    : string;
-  numExpediente       : string;
+  nombreExpediente?    : string;
+  numExpediente?       : string;
   cuantia?            : number;
   sintesisAsunto?     : string;
   nombreAbogado?      : string;

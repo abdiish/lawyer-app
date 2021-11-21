@@ -10,7 +10,7 @@
   <ion-list *ngFor="let judgment of judgments">
     <ion-card>
       <ion-item color="primary">
-        <ion-icon slot="end" name="add"></ion-icon>
+        <ion-icon slot="end" name="add" (click)="verDetalle(judgment._id)"></ion-icon>
         <ion-label>{{ judgment.nombreExpediente }}</ion-label>
       </ion-item>
       <ion-card-content>
