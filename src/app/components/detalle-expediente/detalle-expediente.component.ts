@@ -12,16 +12,11 @@ export class DetalleExpedienteComponent implements OnInit {
   @Input() id: string;
 
   judgment: Expediente =  {};
+  load    : boolean;
 
-  slideOpts = {
-    slidesPerView: 0.9,
-    freeMode: true
-  }
+  slideOpts = { slidesPerView: 0.9, freeMode: true }
 
-  slideChips = {
-    slidesPerView: 0.77,
-    freeMode: true
-  }
+  slideChips = { slidesPerView: 0.77, freeMode: true }
 
   constructor(private expedientesService: ExpedientesService) { }
 
@@ -30,6 +25,7 @@ export class DetalleExpedienteComponent implements OnInit {
     this.expedientesService.getExpediente(this.id).subscribe(resp => {
       console.log(resp);
       this.judgment = resp;
+      this.load = true;
     });
   }
 

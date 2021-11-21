@@ -1,3 +1,4 @@
+import { Cliente } from "../pages/models/cliente";
 
 export interface CargarExpediente {
   total    : number;
@@ -6,8 +7,8 @@ export interface CargarExpediente {
 
 export interface Expediente {
 
-  nombreExpediente?    : string;
-  numExpediente?       : string;
+  nombreExpediente?   : string;
+  numExpediente?      : string;
   cuantia?            : number;
   sintesisAsunto?     : string;
   nombreAbogado?      : string;
@@ -15,6 +16,6 @@ export interface Expediente {
   institucionJudicial?: string;
   tipo?               : string;
   materia?            : string;
-  //public nombreCliente?: Cliente;
+  nombreCliente?      : Cliente;
   _id?                : string;
 }

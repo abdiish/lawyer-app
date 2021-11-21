@@ -1,3 +1,4 @@
+import { Cliente } from "./cliente";
 export class Expediente {
 
   public nombreExpediente    : string;
@@ -9,7 +10,7 @@ export class Expediente {
   public institucionJudicial?: string;
   public tipo?               : string;
   public materia?            : string;
-  //public nombreCliente?: Cliente;
+  public nombreCliente?      : Cliente;
   public _id?                : string;
 
   constructor(
@@ -23,7 +24,7 @@ export class Expediente {
     institucionJudicial?: string,
     tipo?               : string,
     materia?            : string,
-    //public nombreCliente?: Cliente;
+    nombreCliente?      : Cliente,
     _id?                : string,
 
   ) {
@@ -37,6 +38,7 @@ export class Expediente {
     this.institucionJudicial = institucionJudicial;
     this.tipo                = tipo;
     this.materia             = materia;
+    this.nombreCliente       = nombreCliente;
     this._id                 = _id;
   }
 

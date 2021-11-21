@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderCloseComponent } from './header-close/header-close.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { DetalleExpedienteComponent } from './detalle-expediente/detalle-expediente.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -17,7 +18,8 @@ import { DetalleExpedienteComponent } from './detalle-expediente/detalle-expedie
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    PipesModule
   ],
   exports: [
     HeaderMenuComponent,

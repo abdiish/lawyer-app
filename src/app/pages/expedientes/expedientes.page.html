@@ -28,9 +28,9 @@
         </ion-row>
         <ion-chip>
           <ion-avatar>
-            <img src="../../../assets/no-img.png"/>
+            <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
           </ion-avatar>
-          <ion-label color="medium">Nombre del cliente</ion-label>
+          <ion-label color="medium">{{judgment.nombreCliente.nombre}}</ion-label>
         </ion-chip>
         <ion-chip>
           <ion-label color="medium">{{ judgment.tipo }}</ion-label>

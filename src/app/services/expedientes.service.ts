@@ -33,6 +33,7 @@ export class ExpedientesService {
           judgment.institucionJudicial,
           judgment.tipo,
           judgment.materia,
+          judgment.nombreCliente,
           judgment._id
         ));
 
