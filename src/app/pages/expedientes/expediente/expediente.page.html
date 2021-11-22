@@ -1,7 +1,7 @@
 <app-header-close></app-header-close>
 
 <ion-content>
-  <form>
+  <form id="judgmentForm" [formGroup]="judgmentForm" #formJudgment="ngForm">
     <ion-item color="primary">
       <ion-icon slot="start" name="briefcase"></ion-icon>
       <ion-label>Nuevo Expediente</ion-label>
@@ -10,35 +10,33 @@
       <ion-label position="stacked">Nombre del Expediente</ion-label>
       <ion-input type="text"
                  placeholder="p. ej. Juicio Ejecutivo Mercantil"
-                 name="expediente"
+                 formControlName="nombreExpediente"
                  required></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="stacked">Número de Expediente</ion-label>
       <ion-input type="text"
                  placeholder="p. ej. 345/2021"
-                 name="numero"
+                 formControlName="numExpediente"
                  required></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="stacked">Cuantía del Proceso</ion-label>
       <ion-input type="number"
                  placeholder="0"
-                 name=""
+                 formControlName="cuantia"
                  required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Materia del Juicio</ion-label>
-      <ion-select value="peperoni" placeholder="Select Pizza">
-        <ion-select-option value="peperoni">Peperoni</ion-select-option>
-        <ion-select-option value="hawaii">Hawaii</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción" formControlName="materia">
+        <ion-select-option *ngFor="let materia of materias" [value]="materia">{{ materia }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Tipo de Expediente</ion-label>
-      <ion-select value="peperoni" placeholder="Select Pizza">
-        <ion-select-option value="peperoni">Peperoni</ion-select-option>
-        <ion-select-option value="hawaii">Hawaii</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción">
+        <ion-select-option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -47,9 +45,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre del Abogado</ion-label>
-      <ion-select value="peperoni" placeholder="Select Pizza">
-        <ion-select-option value="peperoni">Peperoni</ion-select-option>
-        <ion-select-option value="hawaii">Hawaii</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción">
+        <ion-select-option *ngFor="let contact of contacts" [value]="contact.nombre">{{ contact.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -58,16 +55,14 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre del Abogado</ion-label>
-      <ion-select value="peperoni" placeholder="Select Pizza">
-        <ion-select-option value="peperoni">Peperoni</ion-select-option>
-        <ion-select-option value="hawaii">Hawaii</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción">
+        <ion-select-option *ngFor="let contact of contacts" [value]="contact.nombre">{{ contact.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre del Cliente</ion-label>
-      <ion-select value="peperoni" placeholder="Select Pizza">
-        <ion-select-option value="peperoni">Peperoni</ion-select-option>
-        <ion-select-option value="hawaii">Hawaii</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción">
+        <ion-select-option *ngFor="let client of clients" [value]="client.nombre">{{ client.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -76,9 +71,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre de la Instancia</ion-label>
-      <ion-select value="peperoni" placeholder="Select Pizza">
-        <ion-select-option value="peperoni">Peperoni</ion-select-option>
-        <ion-select-option value="hawaii">Hawaii</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción">
+        <ion-select-option *ngFor="let contact of contacts" [value]="contact.nombre">{{ contact.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -87,7 +81,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Síntesis u Observaciones</ion-label>
-      <ion-textarea placeholder="Añadir un comentario..."></ion-textarea>
+      <ion-textarea placeholder="Añadir un comentario..." formControlName="sintesisAsunto"></ion-textarea>
     </ion-item>
   </form>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

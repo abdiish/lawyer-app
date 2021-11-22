@@ -13,7 +13,18 @@ const URL = environment.url;
 })
 export class ExpedientesService {
 
+  private _tipos   : string[] = ['Administrativo', 'Civil', 'Laboral', 'Mercantil', 'Penal'];
+  private _materias: string[] = ['Amparo', 'Civil', 'Ejecutivo Mercantil', 'Familiar', 'Inmobiliario', 'Laboral', 'Mercantil', 'Penal'];
+
   constructor(private http: HttpClient) { }
+
+  get tipos():string[] {
+    return [...this._tipos];
+  }
+
+  get materias():string[] {
+    return [...this._materias];
+  }
 
   // Obtener expedientes
   getExpedientes() {
