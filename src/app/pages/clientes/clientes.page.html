@@ -12,7 +12,7 @@
 
       <ion-item detail="true">
         <ion-avatar slot="start">
-          <img src="../../../assets/no-img.png"/>
+          <img [src]="cliente.img | imagen: 'clientes'"/>
         </ion-avatar>
         <ion-label>
           <h3>{{ cliente.nombre }}</h3>

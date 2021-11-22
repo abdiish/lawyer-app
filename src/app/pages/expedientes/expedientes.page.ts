@@ -3,6 +3,7 @@ import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { ModalController } from '@ionic/angular';
 import { DetalleExpedienteComponent } from '../../components/detalle-expediente/detalle-expediente.component';
+import { ExpedientePage } from './expediente/expediente.page';
 
 @Component({
   selector: 'app-expedientes',
@@ -41,5 +42,16 @@ export class ExpedientesPage implements OnInit {
 
     return await modal.present();
   }
+
+  async formExpediente() {
+
+    const modal = await this.modalCtrl.create({
+      component: ExpedientePage,
+      cssClass: 'my-custom-class'
+    });
+
+    return await modal.present();
+  }
+
 
 }

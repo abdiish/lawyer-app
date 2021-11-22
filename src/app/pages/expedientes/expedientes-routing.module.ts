@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ExpedientesPage
+  },  {
+    path: 'expediente',
+    loadChildren: () => import('./expediente/expediente.module').then( m => m.ExpedientePageModule)
   }
+
 
 ];
 

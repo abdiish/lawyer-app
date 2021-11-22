@@ -2,15 +2,18 @@
 
 <ion-content *ngIf="load">
   <ion-card>
-    <ion-card-header>
+    <ion-card-content>
       <ion-card-title color="primary">{{judgment.nombreExpediente}}</ion-card-title>
       <ion-card-subtitle>{{judgment.numExpediente}}</ion-card-subtitle>
-    </ion-card-header>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
     <ion-card-content>
+      <ion-card-subtitle>Síntesis u Observaciones</ion-card-subtitle>
       <ion-grid fixed>
         <ion-row>
           <ion-col size="12">
-            <ion-label>{{judgment.sintesisAsunto}}</ion-label>
+            <p>{{judgment.sintesisAsunto}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -65,7 +68,7 @@
   <!-- Mapa -->
   <ion-list>
     <ion-item>
-      <ion-icon slot="end" name="navigate-circle-outline"></ion-icon>
+      <ion-icon color="primary" slot="end" name="trail-sign-outline"></ion-icon>
       <ion-label>{{judgment.institucionJudicial}}</ion-label>
     </ion-item>
   </ion-list>

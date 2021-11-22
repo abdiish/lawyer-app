@@ -6,6 +6,7 @@ import { HeaderCloseComponent } from './header-close/header-close.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { DetalleExpedienteComponent } from './detalle-expediente/detalle-expediente.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { HeaderExpedienteComponent } from './header-expediente/header-expediente.component';
 
 
 
@@ -13,6 +14,7 @@ import { PipesModule } from '../pipes/pipes.module';
   declarations: [
     HeaderMenuComponent,
     HeaderCloseComponent,
+    HeaderExpedienteComponent,
     MapaComponent,
     DetalleExpedienteComponent
   ],
@@ -24,6 +26,7 @@ import { PipesModule } from '../pipes/pipes.module';
   exports: [
     HeaderMenuComponent,
     HeaderCloseComponent,
+    HeaderExpedienteComponent,
     MapaComponent,
     DetalleExpedienteComponent
   ]
