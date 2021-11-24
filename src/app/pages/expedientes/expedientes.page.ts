@@ -12,7 +12,8 @@ import { ExpedientePage } from './expediente/expediente.page';
 })
 export class ExpedientesPage implements OnInit {
 
-  judgments: Expediente[] = [];
+  public judgments  : Expediente[] = [];
+  public textoBuscar: string = '';
 
   constructor(private expedientesService: ExpedientesService,
               private modalCtrl: ModalController) { }
@@ -29,7 +30,10 @@ export class ExpedientesPage implements OnInit {
     });
   }
 
-  onSearchChange(event) {}
+  onSearchChange(event) {
+    console.log(event);
+    this.textoBuscar = event.detail.value;
+  }
 
   async verDetalle(id: string) {
     const modal = await this.modalCtrl.create({

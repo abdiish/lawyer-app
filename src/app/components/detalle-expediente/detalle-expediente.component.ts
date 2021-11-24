@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { DataLocalService } from '../../services/data-local.service';
+import { PopoverController } from '@ionic/angular';
+import { PopoverMenuComponent } from '../popover-menu/popover-menu.component';
 
 @Component({
   selector: 'app-detalle-expediente',
@@ -16,12 +18,19 @@ export class DetalleExpedienteComponent implements OnInit {
   judgment: Expediente =  {};
   load    : boolean;
 
-  slideOpts = { slidesPerView: 0.9, freeMode: true }
+  slideOpts = {
+    slidesPerView: 0.9,
+    freeMode: true
+  }
 
-  slideChips = { slidesPerView: 0.77, freeMode: true }
+  slideChips = {
+    slidesPerView: 0.77,
+    freeMode: true
+  }
 
   constructor(private expedientesService: ExpedientesService,
-              private DataLocalService: DataLocalService) { }
+              private DataLocalService: DataLocalService,
+              private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
 
@@ -34,6 +43,22 @@ export class DetalleExpedienteComponent implements OnInit {
       this.DataLocalService.presentToast('Al parecer ocurrio un error técnico');
       return false;
     });
+  }
+
+  async presentPopover(ev: any) {
+
+    const popover = await this.popoverCtrl.create({
+      component: PopoverMenuComponent,
+      event: ev,
+      translucent: true,
+      backdropDismiss: false
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onWillDismiss();
+    console.log(data);
+
   }
 
 }

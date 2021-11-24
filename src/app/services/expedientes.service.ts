@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CargarExpediente } from '../interfaces/cargar-expedientes';
 import { ExpedienteForm } from '../interfaces/expediente-form';
 import { Expediente } from '../pages/models/expediente';
-
 
 const URL = environment.url;
 
@@ -19,13 +18,9 @@ export class ExpedientesService {
 
   constructor(private http: HttpClient) { }
 
-  get tipos():string[] {
-    return [...this._tipos];
-  }
+  get tipos():string[] { return [...this._tipos]; }
 
-  get materias():string[] {
-    return [...this._materias];
-  }
+  get materias():string[] { return [...this._materias]; }
 
   // Obtener expedientes
   getExpedientes() {
@@ -72,6 +67,14 @@ export class ExpedientesService {
 
     return this.http.post(url, formData);
 
+  }
+
+  // Actualizar información de expediente
+  updateExpediente(numJudgment: Expediente) {
+
+    const url = `${ URL }/expedientes/${numJudgment._id}`;
+
+    return this.http.put(url, numJudgment);
   }
 
 }

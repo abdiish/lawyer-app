@@ -7,7 +7,7 @@
                animated></ion-searchbar>
 
 <ion-content>
-  <ion-list *ngFor="let judgment of judgments">
+  <ion-list *ngFor="let judgment of judgments | filtroExpediente: textoBuscar: 'nombreExpediente'">
     <ion-card>
       <ion-item color="primary">
         <ion-icon slot="end" name="add" (click)="verDetalle(judgment._id)"></ion-icon>

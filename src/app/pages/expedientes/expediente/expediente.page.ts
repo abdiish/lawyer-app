@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ContactosService } from '../../../services/contactos.service';
 import { ClientesService } from '../../../services/clientes.service';
@@ -6,6 +6,7 @@ import { ExpedientesService } from '../../../services/expedientes.service';
 import { DataLocalService } from '../../../services/data-local.service';
 import { Contacto } from '../../models/contacto';
 import { Cliente } from '../../models/cliente';
+import { Expediente } from '../../../interfaces/cargar-expedientes';
 @Component({
   selector: 'app-expediente',
   templateUrl: './expediente.page.html',
@@ -13,6 +14,7 @@ import { Cliente } from '../../models/cliente';
 })
 
 export class ExpedientePage implements OnInit {
+
 
   @ViewChild('formJudgment') formJudgment!: NgForm;
   loading: HTMLIonLoadingElement;
@@ -88,14 +90,10 @@ export class ExpedientePage implements OnInit {
     });
   }
 
-  get errorControl() {
-
-    return this.judgmentForm.controls;
-  }
-
   crearExpediente() {
 
     this.expedientesService.createExpediente(this.judgmentForm.value).subscribe((resp: any) => {
+      console.log(resp);
 
       this.judgmentForm.reset();
 
@@ -107,8 +105,5 @@ export class ExpedientePage implements OnInit {
     });
 
   }
-
-
-
 
 }

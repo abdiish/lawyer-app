@@ -7,6 +7,7 @@ import { MapaComponent } from './mapa/mapa.component';
 import { DetalleExpedienteComponent } from './detalle-expediente/detalle-expediente.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { HeaderExpedienteComponent } from './header-expediente/header-expediente.component';
+import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 
 
 
@@ -16,6 +17,7 @@ import { HeaderExpedienteComponent } from './header-expediente/header-expediente
     HeaderCloseComponent,
     HeaderExpedienteComponent,
     MapaComponent,
+    PopoverMenuComponent,
     DetalleExpedienteComponent
   ],
   imports: [
@@ -28,6 +30,7 @@ import { HeaderExpedienteComponent } from './header-expediente/header-expediente
     HeaderCloseComponent,
     HeaderExpedienteComponent,
     MapaComponent,
+    PopoverMenuComponent,
     DetalleExpedienteComponent
   ]
 })
