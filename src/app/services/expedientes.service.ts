@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { CargarExpediente } from '../interfaces/cargar-expedientes';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { CargarExpediente } from '../interfaces/cargar-expedientes';
+import { ExpedienteForm } from '../interfaces/expediente-form';
 import { Expediente } from '../pages/models/expediente';
 
 
@@ -61,6 +62,15 @@ export class ExpedientesService {
     const url = `${ URL }/expedientes/${ id }`;
 
     return this.http.get(url).pipe(map((resp: { ok: boolean, numJudgment: Expediente }) => resp.numJudgment));
+
+  }
+
+  // Crear expediente
+  createExpediente(formData: ExpedienteForm) {
+
+    const url = `${ URL }/expedientes`;
+
+    return this.http.post(url, formData);
 
   }
 

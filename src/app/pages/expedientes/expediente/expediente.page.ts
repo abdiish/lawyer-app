@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ContactosService } from '../../../services/contactos.service';
 import { ClientesService } from '../../../services/clientes.service';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ExpedientesService } from '../../../services/expedientes.service';
+import { DataLocalService } from '../../../services/data-local.service';
 import { Contacto } from '../../models/contacto';
 import { Cliente } from '../../models/cliente';
-
 @Component({
   selector: 'app-expediente',
   templateUrl: './expediente.page.html',
@@ -15,22 +15,27 @@ import { Cliente } from '../../models/cliente';
 export class ExpedientePage implements OnInit {
 
   @ViewChild('formJudgment') formJudgment!: NgForm;
+  loading: HTMLIonLoadingElement;
 
-  public judgmentForm : FormGroup;
-  public tipos        : string[]   = [];
-  public materias     : string[]   = [];
-  public contacts     : Contacto[] = [];
-  public clients      : Cliente[]  = [];
+  public judgmentForm  : FormGroup;
+  public tipos         : string[]   = [];
+  public materias      : string[]   = [];
+  public instituciones : Contacto[] = [];
+  public contrapartes  : Contacto[] = [];
+  public colaboradores : Contacto[] = [];
+  public contacts      : Contacto[] = [];
+  public clients       : Cliente[]  = [];
 
   constructor(private formBuilder: FormBuilder,
+              private dataLocalService: DataLocalService,
               private contactosService: ContactosService,
               private clientesService: ClientesService,
-              private ExpedientesService: ExpedientesService) { }
+              private expedientesService: ExpedientesService) { }
 
   ngOnInit() {
 
-    this.tipos    = this.ExpedientesService.tipos;
-    this.materias = this.ExpedientesService.materias;
+    this.tipos    = this.expedientesService.tipos;
+    this.materias = this.expedientesService.materias;
     this.cargarContactos();
     this.cargarClientes();
 
@@ -54,18 +59,56 @@ export class ExpedientePage implements OnInit {
   cargarContactos() {
 
     this.contactosService.getContacts().subscribe(({contacts}) => {
-      console.log(contacts);
-      this.contacts = contacts;
 
+      contacts.forEach(element => {
+
+        if (element.tipo === 'Institución Judicial') {
+          this.instituciones.push(element);
+        }
+
+        if (element.tipo === 'Abogado Contraparte') {
+          this.contrapartes.push(element);
+        }
+
+        // TODO: Crear servicio en Backend para colaboradores y consumirlo
+        if (element.tipo === 'Abogado Contraparte') {
+          this.colaboradores.push(element);
+        }
+
+      });
+
+      this.contacts = contacts;
     });
   }
 
   cargarClientes() {
+
     this.clientesService.getClients().subscribe(({clients}) => {
-      console.log(clients);
       this.clients = clients;
     });
   }
+
+  get errorControl() {
+
+    return this.judgmentForm.controls;
+  }
+
+  crearExpediente() {
+
+    this.expedientesService.createExpediente(this.judgmentForm.value).subscribe((resp: any) => {
+
+      this.judgmentForm.reset();
+
+      this.dataLocalService.presentToast('Se ha creado un nuevo expediente');
+
+    }, (err) => {
+      this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
+      return false;
+    });
+
+  }
+
+
 
 
 }

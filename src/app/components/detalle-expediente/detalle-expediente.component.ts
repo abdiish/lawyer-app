@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
+import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
   selector: 'app-detalle-expediente',
@@ -10,6 +11,7 @@ import { ExpedientesService } from '../../services/expedientes.service';
 export class DetalleExpedienteComponent implements OnInit {
 
   @Input() id: string;
+  loading: HTMLIonLoadingElement;
 
   judgment: Expediente =  {};
   load    : boolean;
@@ -18,14 +20,19 @@ export class DetalleExpedienteComponent implements OnInit {
 
   slideChips = { slidesPerView: 0.77, freeMode: true }
 
-  constructor(private expedientesService: ExpedientesService) { }
+  constructor(private expedientesService: ExpedientesService,
+              private DataLocalService: DataLocalService) { }
 
   ngOnInit() {
 
     this.expedientesService.getExpediente(this.id).subscribe(resp => {
-      console.log(resp);
-      this.judgment = resp;
+
       this.load = true;
+      this.judgment = resp;
+
+    }, (err)  => {
+      this.DataLocalService.presentToast('Al parecer ocurrio un error técnico');
+      return false;
     });
   }
 

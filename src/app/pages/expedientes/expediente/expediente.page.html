@@ -35,7 +35,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Tipo de Expediente</ion-label>
-      <ion-select value="" placeholder="Seleccione una opción">
+      <ion-select value="" placeholder="Seleccione una opción" formControlName="tipo">
         <ion-select-option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -45,8 +45,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre del Abogado</ion-label>
-      <ion-select value="" placeholder="Seleccione una opción">
-        <ion-select-option *ngFor="let contact of contacts" [value]="contact.nombre">{{ contact.nombre }}</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción" formControlName="nombreContraparte">
+        <ion-select-option *ngFor="let contraparte of contrapartes" [value]="contraparte.nombre">{{ contraparte.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -55,14 +55,14 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre del Abogado</ion-label>
-      <ion-select value="" placeholder="Seleccione una opción">
-        <ion-select-option *ngFor="let contact of contacts" [value]="contact.nombre">{{ contact.nombre }}</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción" formControlName="nombreAbogado">
+        <ion-select-option *ngFor="let colaborador of colaboradores" [value]="colaborador.nombre">{{ colaborador.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre del Cliente</ion-label>
-      <ion-select value="" placeholder="Seleccione una opción">
-        <ion-select-option *ngFor="let client of clients" [value]="client.nombre">{{ client.nombre }}</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción" formControlName="nombreCliente">
+        <ion-select-option *ngFor="let client of clients" [value]="client._id">{{ client.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -71,8 +71,8 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nombre de la Instancia</ion-label>
-      <ion-select value="" placeholder="Seleccione una opción">
-        <ion-select-option *ngFor="let contact of contacts" [value]="contact.nombre">{{ contact.nombre }}</ion-select-option>
+      <ion-select value="" placeholder="Seleccione una opción" formControlName="institucionJudicial">
+        <ion-select-option *ngFor="let institucion of instituciones" [value]="institucion.nombre">{{ institucion.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item color="primary" class="divider">
@@ -85,7 +85,7 @@
     </ion-item>
   </form>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary">
+    <ion-fab-button color="secondary" (click)="crearExpediente()">
       <ion-icon name="save"></ion-icon>
     </ion-fab-button>
   </ion-fab>

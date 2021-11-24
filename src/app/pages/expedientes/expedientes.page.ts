@@ -24,7 +24,6 @@ export class ExpedientesPage implements OnInit {
   cargarExpedientes() {
 
     this.expedientesService.getExpedientes().subscribe(({total, judgments}) => {
-      console.log(judgments);
 
       this.judgments = judgments;
     });
