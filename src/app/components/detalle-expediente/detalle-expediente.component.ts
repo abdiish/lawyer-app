@@ -18,7 +18,6 @@ export class DetalleExpedienteComponent implements OnInit {
 
   public judgment: Expediente =  {};
   public load    : boolean;
-  public data: string;
 
   constructor(private expedientesService: ExpedientesService,
               private DataLocalService: DataLocalService,
@@ -27,10 +26,6 @@ export class DetalleExpedienteComponent implements OnInit {
   ngOnInit() {
 
     this.expedientesService.getExpediente(this.id).subscribe(resp => {
-      console.log(resp);
-      this.data = resp._id;
-      console.log(this.data);
-
       this.load = true;
       this.judgment = resp;
 
@@ -42,7 +37,6 @@ export class DetalleExpedienteComponent implements OnInit {
 
   async actualizarExpediente(id: string) {
 
-    console.log('mandar id para actualizar data:', id);
     const data = this.judgment;
     console.log('Data: ',data);
 

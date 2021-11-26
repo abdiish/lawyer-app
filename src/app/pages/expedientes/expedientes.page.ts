@@ -34,7 +34,6 @@ export class ExpedientesPage implements OnInit {
   }
 
   onSearchChange(event: any) {
-    console.log(event);
     this.textoBuscar = event.detail.value;
   }
 

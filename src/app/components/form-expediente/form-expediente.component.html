@@ -1,0 +1,110 @@
+<body>
+  <ion-app>
+    <app-header-close></app-header-close>
+    <ion-item color="primary">
+      <ion-icon slot="start" name="briefcase"></ion-icon>
+      <ion-label>Datos del Expediente</ion-label>
+    </ion-item>
+    <ion-content fullscreen>
+      <form id="judgmentForm" [formGroup]="judgmentForm" #formJudgment="ngForm">
+        <ion-list lines="full" class="ion-no-margin">
+          <ion-item lines="full">
+            <ion-label position="stacked">Nombre del Expediente</ion-label>
+            <ion-input type="text"
+                       placeholder="p. ej. Juicio Ejecutivo Mercantil"
+                       formControlName="nombreExpediente"
+                       required></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Número de Expediente</ion-label>
+            <ion-input type="text"
+                       placeholder="p. ej. 345/2021"
+                       formControlName="numExpediente"
+                       required></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label position="stacked">Cuantía del Proceso</ion-label>
+            <ion-input type="decimal"
+                       placeholder="0"
+                       formControlName="cuantia"
+                       required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Materia del Juicio</ion-label>
+            <ion-select value=""
+                        placeholder="Seleccione una opción"
+                        formControlName="materia">
+            <ion-select-option *ngFor="let materia of materias"
+                               [value]="materia">{{ materia }}</ion-select-option>
+          </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Tipo de Expediente</ion-label>
+            <ion-select value=""
+                        placeholder="Seleccione una opción"
+                        formControlName="tipo">
+              <ion-select-option *ngFor="let tipo of tipos"
+                                [value]="tipo">{{ tipo }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Abogado Contraparte</ion-label>
+            <ion-select value="" placeholder="Seleccione una opción"
+                                 formControlName="nombreContraparte">
+              <ion-select-option *ngFor="let contraparte of contrapartes"
+                                 [value]="contraparte.nombre">{{ contraparte.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Nombre del Abogado</ion-label>
+            <ion-select value="" placeholder="Seleccione una opción"
+                                 formControlName="nombreAbogado">
+              <ion-select-option *ngFor="let colaborador of colaboradores"
+                                 [value]="colaborador.nombre">{{ colaborador.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Nombre del Cliente</ion-label>
+            <ion-select value="" placeholder="Seleccione una opción"
+                                 formControlName="nombreCliente">
+              <ion-select-option *ngFor="let client of clients"
+                                 [value]="client._id">{{ client.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Instancia Judicial</ion-label>
+            <ion-select value="" placeholder="Seleccione una opción"
+                                 formControlName="institucionJudicial">
+              <ion-select-option *ngFor="let institucion of instituciones"
+                                 [value]="institucion.nombre">{{ institucion.nombre }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Síntesis u Observaciones</ion-label>
+            <ion-textarea placeholder="Añadir un comentario..."
+                          formControlName="sintesisAsunto"></ion-textarea>
+          </ion-item>
+        </ion-list>
+      </form>
+    </ion-content>
+    <ion-footer no-border>
+      <ion-toolbar>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="secondary" (click)="crearExpediente()">
+              <ion-icon slot="start" name="save"></ion-icon>
+              Guardar
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="secondary">
+              <ion-icon slot="start" name="close-circle"></ion-icon>
+              Cancelar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-app>
+</body>

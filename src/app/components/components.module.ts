@@ -8,6 +8,8 @@ import { DetalleExpedienteComponent } from './detalle-expediente/detalle-expedie
 import { PipesModule } from '../pipes/pipes.module';
 import { HeaderExpedienteComponent } from './header-expediente/header-expediente.component';
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
+import { FormExpedienteComponent } from './form-expediente/form-expediente.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +20,15 @@ import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
     HeaderExpedienteComponent,
     MapaComponent,
     PopoverMenuComponent,
-    DetalleExpedienteComponent
+    DetalleExpedienteComponent,
+    FormExpedienteComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
-    PipesModule
+    PipesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderMenuComponent,
@@ -31,7 +36,8 @@ import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
     HeaderExpedienteComponent,
     MapaComponent,
     PopoverMenuComponent,
-    DetalleExpedienteComponent
+    DetalleExpedienteComponent,
+    FormExpedienteComponent
   ]
 })
 export class ComponentsModule { }
