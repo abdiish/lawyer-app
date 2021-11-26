@@ -3,12 +3,7 @@
 <ion-content *ngIf="load">
   <ion-card>
     <ion-item color="primary">
-      <ion-buttons slot="end">
-        <ion-button (click)="presentPopover($event)">
-          <ion-icon slot="end" name="ellipsis-vertical-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-label>{{judgment.nombreExpediente}}</ion-label>
+      <ion-label>{{ judgment.nombreExpediente }}</ion-label>
     </ion-item>
     <ion-card-content>
       <ion-card-subtitle>Número de expediente: {{ judgment.numExpediente }}</ion-card-subtitle>
@@ -18,59 +13,82 @@
       <ion-text>
         <p>{{ judgment.sintesisAsunto }}</p>
       </ion-text>
+      <ion-chip color="primary">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <ion-label color="medium">{{ judgment.materia }}</ion-label>
+      </ion-chip>
+      <ion-chip color="primary">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <ion-label color="medium">{{ judgment.tipo }}</ion-label>
+      </ion-chip>
     </ion-card-content>
   </ion-card>
-  <!-- Opciones -->
-  <ion-slides [options]="slideChips">
-    <ion-slide>
-      <ion-chip color="primary">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
-        <ion-label color="medium">{{judgment.materia}}</ion-label>
-      </ion-chip>
-      <ion-chip color="primary">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
-        <ion-label color="medium">{{judgment.tipo}}</ion-label>
-      </ion-chip>
-      <ion-chip color="primary">
-        <ion-icon name="document-attach-outline"></ion-icon>
-        <ion-label color="medium">Documentos</ion-label>
-      </ion-chip>
-      <ion-chip color="primary">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <ion-label color="medium">Tareas</ion-label>
-      </ion-chip>
-    </ion-slide>
-  </ion-slides>
-  <!-- Personajes -->
-  <ion-slides [options]="slideOpts">
-    <ion-slide>
+  <ion-card>
+    <ion-card-content>
       <ion-row>
-        <ion-col size="4">
-          <ion-card class="card_cliente">
-            <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
-            <ion-label class="nombre_cliente">{{ judgment.nombreCliente.nombre | slice: 0:28 }} {{ (judgment.nombreCliente.nombre.length > 28) ? '...' : '' }}</ion-label>
-          </ion-card>
+        <ion-col size="7">
+          <ion-button expand="full"
+                      shape="round">
+            <ion-icon slot="end" name="document-attach-outline"></ion-icon>
+            Documentos
+          </ion-button>
         </ion-col>
-        <ion-col size="4">
-          <ion-card class="card_abogado">
-            <img src="../../../../assets/no-img.png">
-            <ion-label class="nombre_abogado">{{judgment.nombreAbogado | slice: 0:28 }} {{ (judgment.nombreAbogado.length > 28) ? '...' : '' }}</ion-label>
-          </ion-card>
-        </ion-col>
-        <ion-col size="4">
-          <ion-card class="card_contraparte">
-            <img src="../../../../assets/no-img.png">
-            <ion-label class="nombre_contraparte">{{judgment.nombreContraparte | slice: 0:28 }} {{ (judgment.nombreContraparte.length > 28) ? '...' : '' }}</ion-label>
-          </ion-card>
+        <ion-col size="5">
+          <ion-button expand="full"
+                      shape="round">
+            <ion-icon slot="end" name="calendar-outline"></ion-icon>
+            Tareas
+          </ion-button>
         </ion-col>
       </ion-row>
-    </ion-slide>
-  </ion-slides>
-  <!-- Mapa -->
-  <ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
     <ion-item>
-      <ion-icon color="primary" slot="end" name="trail-sign-outline"></ion-icon>
-      <ion-label>{{judgment.institucionJudicial}}</ion-label>
+      <ion-label><h3>Información adicional</h3></ion-label>
     </ion-item>
-  </ion-list>
+    <ion-card-content>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
+        </ion-avatar>
+        <ion-icon color="primary" slot="end" name="open-outline"></ion-icon>
+        <ion-label>
+          <h3><sub>Cliente</sub></h3>
+          <h3>{{ judgment.nombreCliente.nombre }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
+        </ion-avatar>
+        <ion-icon color="primary" slot="end" name="open-outline"></ion-icon>
+        <ion-label>
+          <h3><sub>Abogado</sub></h3>
+          <h3>{{ judgment.nombreAbogado }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
+        </ion-avatar>
+        <ion-icon color="primary" slot="end" name="open-outline"></ion-icon>
+        <ion-label>
+          <h3><sub>Abogado Contraparte</sub></h3>
+          <h3>{{ judgment.nombreAbogado }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
+        </ion-avatar>
+        <ion-icon color="primary" slot="end" name="location-outline"></ion-icon>
+        <ion-label>
+          <h3><sub>Instancia Judicial</sub></h3>
+          <h3>{{ judgment.institucionJudicial }}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!-- Mapa -->
 </ion-content>

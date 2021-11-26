@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { DataLocalService } from '../../services/data-local.service';
-import { PopoverController } from '@ionic/angular';
-import { PopoverMenuComponent } from '../popover-menu/popover-menu.component';
+import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ExpedientePage } from '../../pages/expedientes/expediente/expediente.page';
 
 @Component({
   selector: 'app-detalle-expediente',
@@ -12,29 +12,24 @@ import { PopoverMenuComponent } from '../popover-menu/popover-menu.component';
 })
 export class DetalleExpedienteComponent implements OnInit {
 
-  @Input() id: string;
+  @Input() id: string; // Enviar información hacia un componente hijo
+
   loading: HTMLIonLoadingElement;
 
-  judgment: Expediente =  {};
-  load    : boolean;
-
-  slideOpts = {
-    slidesPerView: 0.9,
-    freeMode: true
-  }
-
-  slideChips = {
-    slidesPerView: 0.77,
-    freeMode: true
-  }
+  public judgment: Expediente =  {};
+  public load    : boolean;
+  public data: string;
 
   constructor(private expedientesService: ExpedientesService,
               private DataLocalService: DataLocalService,
-              private popoverCtrl: PopoverController) { }
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
 
     this.expedientesService.getExpediente(this.id).subscribe(resp => {
+      console.log(resp);
+      this.data = resp._id;
+      console.log(this.data);
 
       this.load = true;
       this.judgment = resp;
@@ -45,19 +40,20 @@ export class DetalleExpedienteComponent implements OnInit {
     });
   }
 
-  async presentPopover(ev: any) {
+  async actualizarExpediente(id: string) {
 
-    const popover = await this.popoverCtrl.create({
-      component: PopoverMenuComponent,
-      event: ev,
-      translucent: true,
-      backdropDismiss: false
+    console.log('mandar id para actualizar data:', id);
+    const data = this.judgment;
+    console.log('Data: ',data);
+
+    const modal = await this.modalCtrl.create({
+      component: ExpedientePage,
+      componentProps: {
+        id
+      }
     });
 
-    await popover.present();
-
-    const { data } = await popover.onWillDismiss();
-    console.log(data);
+    return await modal.present();
 
   }
 

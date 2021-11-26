@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { ExpedientesService } from '../../services/expedientes.service';
+import { DetalleExpedienteComponent } from '../detalle-expediente/detalle-expediente.component';
 
 @Component({
   selector: 'app-popover-menu',
@@ -8,18 +10,29 @@ import { PopoverController } from '@ionic/angular';
 })
 export class PopoverMenuComponent implements OnInit {
 
-  items = Array(7);
+  @Input() id: string; // Enviar info a componente hijo
 
-  constructor(private popoverCtrl: PopoverController) { }
+  constructor(private popoverCtrl: PopoverController,
+              private modalCtrl: ModalController,
+              private expedientesService: ExpedientesService) { }
 
   ngOnInit() {}
 
-  onClick( valor: number ) {
-
-    this.popoverCtrl.dismiss({
-      item: valor
+  // Muestra ventana modal con información del expediente
+  async verDetalle(id: string) {
+    const modal = await this.modalCtrl.create({
+      component: DetalleExpedienteComponent,
+      componentProps: {
+        id
+      }
     });
+    this.closePopover();
+    return await modal.present();
+  }
 
+  // Cerrar popover
+  closePopover() {
+    this.popoverCtrl.dismiss();
   }
 
 }

@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { CargarExpediente } from '../interfaces/cargar-expedientes';
 import { ExpedienteForm } from '../interfaces/expediente-form';
 import { Expediente } from '../pages/models/expediente';
+import { delay } from 'rxjs/operators';
 
 const URL = environment.url;
 

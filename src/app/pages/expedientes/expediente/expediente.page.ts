@@ -27,6 +27,7 @@ export class ExpedientePage implements OnInit {
   public colaboradores : Contacto[] = [];
   public contacts      : Contacto[] = [];
   public clients       : Cliente[]  = [];
+  public expedienteSeleccionado: Expediente;
 
   constructor(private formBuilder: FormBuilder,
               private dataLocalService: DataLocalService,
@@ -103,6 +104,17 @@ export class ExpedientePage implements OnInit {
       this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
       return false;
     });
+
+  }
+
+  actualizarExpediente(id: string) {
+
+    console.log(id);
+
+    const data = {
+      ...this.judgmentForm.value,
+      _id: this.expedienteSeleccionado._id
+    }
 
   }
 

@@ -1,6 +1,24 @@
 <ion-list>
-  <ion-item *ngFor="let item of items; let i = index"
-            (click)="onClick( i + 1 )">
-    <ion-label>Item: {{ i + 1 }}</ion-label>
+  <ion-list-header>Opciones</ion-list-header>
+
+  <ion-item button (click)="verDetalle(id)">
+    <ion-icon slot="start" name="eye-outline"></ion-icon>
+    <label>Detalles</label>
+  </ion-item>
+  <ion-item button>
+    <ion-icon slot="start" name="create-outline"></ion-icon>
+    <label>Editar</label>
+  </ion-item>
+  <ion-item button>
+    <ion-icon slot="start" name="archive-outline"></ion-icon>
+    <label>Archivar</label>
+  </ion-item>
+  <ion-item button>
+    <ion-icon slot="start" name="trash-outline"></ion-icon>
+    <label>Eliminar</label>
+  </ion-item>
+  <ion-item lines="none" button (click)="closePopover()">
+    <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+    <label>Cancelar</label>
   </ion-item>
 </ion-list>
