@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 import { CargarExpediente } from '../interfaces/cargar-expedientes';
 import { ExpedienteForm } from '../interfaces/expediente-form';
 import { Expediente } from '../pages/models/expediente';
-import { delay } from 'rxjs/operators';
 
 const URL = environment.url;
 
@@ -13,6 +12,9 @@ const URL = environment.url;
   providedIn: 'root'
 })
 export class ExpedientesService {
+
+  expedientePost = 0;
+  nuevoExpediente = new EventEmitter<Expediente>();
 
   private _tipos   : string[] = ['Administrativo', 'Civil', 'Laboral', 'Mercantil', 'Penal'];
   private _materias: string[] = ['Amparo', 'Civil', 'Ejecutivo Mercantil', 'Familiar', 'Inmobiliario', 'Laboral', 'Mercantil', 'Penal'];
@@ -24,7 +26,13 @@ export class ExpedientesService {
   get materias():string[] { return [...this._materias]; }
 
   // Obtener expedientes
-  getExpedientes() {
+  getExpedientes(pull: boolean = false) {
+
+    if (pull) {
+      this.expedientePost = 0;
+    }
+
+    this.expedientePost ++;
 
     const url = `${ URL }/expedientes`;
 

@@ -3,7 +3,6 @@ import { ContactosService } from '../../services/contactos.service';
 import { IonList } from '@ionic/angular';
 import { Contacto } from '../../interfaces/cargar-contactos';
 import { ModalController } from '@ionic/angular';
-import { ModalContactoPage } from './modal-contacto/modal-contacto.page';
 
 @Component({
   selector: 'app-contactos',
@@ -57,14 +56,14 @@ export class ContactosPage implements OnInit {
 
   }
 
-  async itemClick(contacto: any) {
-    console.log(contacto);
-      const modal = await this.modalContrl.create({
-        component: ModalContactoPage,
-        cssClass: 'my-custom-class'
-      });
-      return await modal.present();
-    }
+  // async itemClick(contacto: any) {
+  //   console.log(contacto);
+  //     const modal = await this.modalContrl.create({
+  //       component: ModalContactoPage,
+  //       cssClass: 'my-custom-class'
+  //     });
+  //     return await modal.present();
+  //   }
 
 
 

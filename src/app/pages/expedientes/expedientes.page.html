@@ -7,59 +7,13 @@
                animated></ion-searchbar>
 
 <ion-content>
-  <ion-list *ngFor="let judgment of judgments | filtroExpediente: textoBuscar: 'nombreExpediente'">
-    <ion-card>
-      <ion-item color="primary">
-        <!--(click)="verDetalle(judgment._id)"-->
-        <ion-icon slot="end" name="ellipsis-vertical-outline" (click)="presentPopover($event, judgment._id)"></ion-icon>
-        <ion-label>{{ judgment.nombreExpediente }}</ion-label>
-      </ion-item>
-      <ion-card-content>
-        <ion-row>
-          <ion-col size="6">
-            <div>
-              <h3><sub>Cuantía</sub></h3>
-              <ion-text color="primary">
-                <h2>${{ judgment.cuantia | number: '1.2-2' }}</h2>
-              </ion-text>
-            </div>
-          </ion-col>
-          <ion-col size="6">
-            <div>
-              <h3><sub>Número de Expediente</sub></h3>
-              <ion-text color="primary">
-                <h2>{{ judgment.numExpediente }}</h2>
-              </ion-text>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6">
-            <div class="documents">
-              <h3><sub>Documentos</sub></h3>
-              <ion-note color="primary" mode="ios" slot="end" class="i-note">0</ion-note>
-            </div>
-          </ion-col>
-          <ion-col size="6">
-            <div class="tasks">
-              <h3><sub>Tareas</sub></h3>
-              <ion-note color="primary" mode="ios" slot="end">0</ion-note>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-chip>
-          <ion-avatar>
-            <img [src]="judgment.nombreCliente.img | imagen: 'clientes'">
-          </ion-avatar>
-          <ion-label color="medium">{{judgment.nombreCliente.nombre}}</ion-label>
-        </ion-chip>
-        <ion-chip>
-          <ion-icon name="information-circle-outline"></ion-icon>
-          <ion-label color="medium">{{ judgment.tipo }}</ion-label>
-        </ion-chip>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+   <!--Refresher-->
+   <!-- <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+  <!--Renderizar expedientes -->
+  <app-posts-expedientes [judgments]="judgments | filtroExpediente: textoBuscar: 'nombreExpediente'"></app-posts-expedientes>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="secondary" (click)="formExpediente()">
       <ion-icon name="add"></ion-icon>

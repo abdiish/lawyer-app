@@ -3,7 +3,6 @@ import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { DataLocalService } from '../../services/data-local.service';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { ExpedientePage } from '../../pages/expedientes/expediente/expediente.page';
 
 @Component({
   selector: 'app-detalle-expediente',

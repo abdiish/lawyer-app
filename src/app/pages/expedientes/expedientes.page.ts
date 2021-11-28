@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
-import { ModalController, PopoverController } from '@ionic/angular';
-import { PopoverMenuComponent } from 'src/app/components/popover-menu/popover-menu.component';
+import { ModalController } from '@ionic/angular';
 import { FormExpedienteComponent } from '../../components/form-expediente/form-expediente.component';
 
 @Component({
@@ -18,8 +17,7 @@ export class ExpedientesPage implements OnInit {
   public textoBuscar: string = '';
 
   constructor(private expedientesService: ExpedientesService,
-              private modalCtrl: ModalController,
-              private popoverCtrl: PopoverController) { }
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.cargarExpedientes();
@@ -37,7 +35,6 @@ export class ExpedientesPage implements OnInit {
     this.textoBuscar = event.detail.value;
   }
 
-
   // Modal, formulario para crear nuevo expediente
   async formExpediente() {
 
@@ -46,23 +43,6 @@ export class ExpedientesPage implements OnInit {
     });
 
     return await modal.present();
-  }
-
-  // Lanza popover: opc[ver,editar,eliminar...]
-  async presentPopover(ev: any, id: string) {
-
-    const popover = await this.popoverCtrl.create({
-      component: PopoverMenuComponent,
-      event: ev,
-      translucent: true,
-      backdropDismiss: false,
-      componentProps: {
-        id
-      }
-    });
-
-    await popover.present();
-
   }
 
   }

@@ -10,32 +10,38 @@ import { HeaderExpedienteComponent } from './header-expediente/header-expediente
 import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { FormExpedienteComponent } from './form-expediente/form-expediente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PostsExpedientesComponent } from './posts-expedientes/posts-expedientes.component';
+import { PostExpedienteComponent } from './post-expediente/post-expediente.component';
 
 @NgModule({
   declarations: [
+    DetalleExpedienteComponent,
+    FormExpedienteComponent,
     HeaderMenuComponent,
     HeaderCloseComponent,
     HeaderExpedienteComponent,
     MapaComponent,
     PopoverMenuComponent,
-    DetalleExpedienteComponent,
-    FormExpedienteComponent
+    PostsExpedientesComponent,
+    PostExpedienteComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
     PipesModule,
-    FormsModule,
     ReactiveFormsModule
   ],
   exports: [
+    DetalleExpedienteComponent,
+    FormExpedienteComponent,
     HeaderMenuComponent,
     HeaderCloseComponent,
     HeaderExpedienteComponent,
     MapaComponent,
     PopoverMenuComponent,
-    DetalleExpedienteComponent,
-    FormExpedienteComponent
+    PostsExpedientesComponent,
+    PostExpedienteComponent
   ]
 })
 export class ComponentsModule { }
