@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { DataLocalService } from '../../services/data-local.service';
 import { ContactosService } from '../../services/contactos.service';
@@ -7,6 +7,8 @@ import { ExpedientesService } from '../../services/expedientes.service';
 import { Contacto } from '../../pages/models/contacto';
 import { Cliente } from '../../pages/models/cliente';
 import { Expediente } from '../../pages/models/expediente';
+import { ModalController } from '@ionic/angular';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-expediente',
@@ -15,37 +17,41 @@ import { Expediente } from '../../pages/models/expediente';
 })
 export class FormExpedienteComponent implements OnInit {
 
+  @Input() id: string;
   @ViewChild('formJudgment') formJudgment!: NgForm;
   loading: HTMLIonLoadingElement;
 
   public judgmentForm  : FormGroup;
-  public tipos         : string[]   = [];
-  public materias      : string[]   = [];
-  public instituciones : Contacto[] = [];
-  public contrapartes  : Contacto[] = [];
-  public colaboradores : Contacto[] = [];
-  public contacts      : Contacto[] = [];
-  public clients       : Cliente[]  = [];
+  public tipos         : string[]     = [];
+  public materias      : string[]     = [];
+  public judgments     : Expediente[] = [];
+  public instituciones : Contacto[]   = [];
+  public contrapartes  : Contacto[]   = [];
+  public colaboradores : Contacto[]   = [];
+  public contacts      : Contacto[]   = [];
+  public clients       : Cliente[]    = [];
   public expedienteSeleccionado: Expediente;
 
   constructor(private formBuilder: FormBuilder,
               private dataLocalService: DataLocalService,
               private contactosService: ContactosService,
               private clientesService: ClientesService,
-              private expedientesService: ExpedientesService) { }
+              private expedientesService: ExpedientesService,
+              public modalCtrl: ModalController) { }
 
   ngOnInit() {
 
     this.tipos    = this.expedientesService.tipos;
     this.materias = this.expedientesService.materias;
+    this.cargarExpediente(this.id);
     this.cargarContactos();
     this.cargarClientes();
 
     this.judgmentForm = this.formBuilder.group({
 
-      nombreExpediente   : ['Juicio Ejecutivo Mercantil'],
-      numExpediente      : ['345/2021'],
-      cuantia            : ['5000'],
+      nombreExpediente   : ['Demanda pensión alimenticia'],
+      numExpediente      : ['027/11/2021'],
+      cuantia            : ['1000'],
       sintesisAsunto     : ['Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.'],
       nombreAbogado      : [''],
       nombreContraparte  : [''],
@@ -53,6 +59,48 @@ export class FormExpedienteComponent implements OnInit {
       tipo               : [''],
       materia            : [''],
       nombreCliente      : [''],
+
+    });
+  }
+
+  cargarExpediente(id: string) {
+
+    if (id === 'nuevo') {
+      return;
+    }
+
+    this.expedientesService.getExpediente(id).pipe(delay(100)).subscribe(judgment => {
+
+      if (!judgment) {
+        return;
+      }
+
+      const {
+        nombreExpediente,
+        numExpediente,
+        cuantia,
+        sintesisAsunto,
+        nombreAbogado,
+        nombreContraparte,
+        institucionJudicial,
+        tipo,
+        materia,
+        nombreCliente: { _id }
+      } = judgment;
+
+      this.expedienteSeleccionado = judgment;
+      this.judgmentForm.setValue({
+        nombreExpediente,
+        numExpediente,
+        cuantia,
+        sintesisAsunto,
+        nombreAbogado,
+        nombreContraparte,
+        institucionJudicial,
+        tipo,
+        materia,
+        nombreCliente: _id
+      });
 
     });
   }
@@ -89,19 +137,38 @@ export class FormExpedienteComponent implements OnInit {
     });
   }
 
-  crearExpediente() {
+  saveData() {
 
-    this.expedientesService.createExpediente(this.judgmentForm.value).subscribe((resp: any) => {
-      console.log(resp);
+    if (this.expedienteSeleccionado) {
+      const data = {
+        ...this.judgmentForm.value,
+        _id: this.expedienteSeleccionado._id
+      }
+      // Actualizar información del expediente
+      this.expedientesService.updateExpediente(data).subscribe(resp => {
+        this.judgmentForm.reset();
+        this.dismissModal();
+        this.dataLocalService.presentToastWithOptions('Información de expediente actualizada');
+      }, (err) => {
+        this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
+        return err;
+      });
+    }else{
+      // Crear nuevo expediente
+      this.expedientesService.createExpediente(this.judgmentForm.value).subscribe((resp: any) => {
 
-      this.judgmentForm.reset();
+        this.dataLocalService.presentToastWithOptions('Se ha creado un nuevo expediente');
+      }, (err) => {
+        this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
+        return err;
+      });
+    }
 
-      this.dataLocalService.presentToast('Se ha creado un nuevo expediente');
+  }
 
-    }, (err) => {
-      this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
-      return false;
-    });
+  async dismissModal() {
+
+    await this.modalCtrl.dismiss({'dismissed': true});
 
   }
 

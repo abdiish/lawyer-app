@@ -73,9 +73,17 @@ export class ExpedientesService {
   // Actualizar información de expediente
   updateExpediente(numJudgment: Expediente) {
 
-    const url = `${ URL }/expedientes/${numJudgment._id}`;
+    const url = `${ URL }/expedientes/${ numJudgment._id }`;
 
     return this.http.put(url, numJudgment);
+  }
+
+  // Eliminar expediente
+  deleteExpediente(_id: string) {
+
+    const url = `${ URL }/expedientes/${ _id }`;
+
+    return this.http.delete(url);
   }
 
 }

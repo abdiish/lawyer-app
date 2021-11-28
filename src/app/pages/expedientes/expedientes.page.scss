@@ -2,3 +2,12 @@
 ion-content {
   --ion-background-color:#fafafa
 }
+
+ion-note {
+  margin-left: 10px;
+}
+
+.documents, .tasks {
+  display: flex;
+}
+

@@ -11,8 +11,6 @@ import { PopoverMenuComponent } from './popover-menu/popover-menu.component';
 import { FormExpedienteComponent } from './form-expediente/form-expediente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
   declarations: [
     HeaderMenuComponent,

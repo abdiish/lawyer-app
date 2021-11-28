@@ -18,4 +18,21 @@ export class DataLocalService {
     toast.present();
   }
 
+  async presentToastWithOptions(message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      position: 'bottom',
+      buttons: [
+       {
+          text: 'Aceptar',
+          role: 'acept',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    toast.present();
+  }
+
 }

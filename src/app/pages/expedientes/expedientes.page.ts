@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { ExpedientePage } from './expediente/expediente.page';
 import { PopoverMenuComponent } from 'src/app/components/popover-menu/popover-menu.component';
+import { FormExpedienteComponent } from '../../components/form-expediente/form-expediente.component';
 
 @Component({
   selector: 'app-expedientes',
@@ -42,7 +42,7 @@ export class ExpedientesPage implements OnInit {
   async formExpediente() {
 
     const modal = await this.modalCtrl.create({
-      component: ExpedientePage
+      component: FormExpedienteComponent
     });
 
     return await modal.present();
@@ -51,7 +51,7 @@ export class ExpedientesPage implements OnInit {
   // Lanza popover: opc[ver,editar,eliminar...]
   async presentPopover(ev: any, id: string) {
 
-      const popover = await this.popoverCtrl.create({
+    const popover = await this.popoverCtrl.create({
       component: PopoverMenuComponent,
       event: ev,
       translucent: true,

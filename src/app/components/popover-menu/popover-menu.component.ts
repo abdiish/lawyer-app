@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { DetalleExpedienteComponent } from '../detalle-expediente/detalle-expediente.component';
 import { FormExpedienteComponent } from '../form-expediente/form-expediente.component';
+import { ExpedientesService } from '../../services/expedientes.service';
+import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
   selector: 'app-popover-menu',
@@ -13,12 +15,16 @@ export class PopoverMenuComponent implements OnInit {
   @Input() id: string; // Enviar info a componente hijo
 
   constructor(private popoverCtrl: PopoverController,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              private alertCtrl: AlertController,
+              private expedientesService: ExpedientesService,
+              private dataLocalServie: DataLocalService) { }
 
   ngOnInit() {}
 
   // Muestra ventana modal con información del expediente
   async detalle(id: string) {
+
     const modal = await this.modalCtrl.create({
       component: DetalleExpedienteComponent,
       componentProps: {
@@ -31,6 +37,7 @@ export class PopoverMenuComponent implements OnInit {
 
   // Muestra ventana modal, formulario para editar expediente
   async actualizar(id: string) {
+
     const modal = await this.modalCtrl.create({
       component: FormExpedienteComponent,
       componentProps: {
@@ -39,6 +46,41 @@ export class PopoverMenuComponent implements OnInit {
     });
     this.closePopover();
     return await modal.present();
+  }
+
+  // Eliminar expediente
+  async eliminar(id: string) {
+
+    const alert = await this.alertCtrl.create({
+      header: 'Eliminar expediente',
+      message: '¿Está seguro que desea eliminar este expediente de forma permanente?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            return;
+          }
+        }, {
+          text: 'Aceptar',
+          role: 'acept',
+          handler: () => {
+            console.log('Confirm Aceptar');
+            this.expedientesService.deleteExpediente(id)
+              .subscribe(resp =>{
+                console.log('Respuesta al eliminar expediente:',resp);
+                this.dataLocalServie.presentToastWithOptions('Se eliminó el expediente de forma permanente');
+              });
+          }
+        }
+      ]
+    });
+
+    this.closePopover();
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 
   // Cerrar popover

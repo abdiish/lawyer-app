@@ -35,20 +35,4 @@ export class DetalleExpedienteComponent implements OnInit {
     });
   }
 
-  async actualizarExpediente(id: string) {
-
-    const data = this.judgment;
-    console.log('Data: ',data);
-
-    const modal = await this.modalCtrl.create({
-      component: ExpedientePage,
-      componentProps: {
-        id
-      }
-    });
-
-    return await modal.present();
-
-  }
-
 }
