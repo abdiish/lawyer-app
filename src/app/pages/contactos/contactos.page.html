@@ -10,7 +10,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let contacto of contactos | filtro: textoBuscar: 'nombre' | filtro: tipo: 'tipo'">
 
-      <ion-item detail="true" (click)="itemClick(contacto)">
+      <ion-item detail="true">
         <ion-avatar slot="start">
           <img src="../../../assets/no-img.png"/>
         </ion-avatar>

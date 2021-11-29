@@ -6,11 +6,11 @@
                debounce="250"
                animated></ion-searchbar>
 
-<ion-content>
-   <!--Refresher-->
-   <!-- <ion-refresher slot="fixed">
+<ion-content  *ngIf="load">
+   <!-- Refresher-->
+  <ion-refresher slot="fixed"  (ionRefresh)="recargar($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
+  </ion-refresher>
   <!--Renderizar expedientes -->
   <app-posts-expedientes [judgments]="judgments | filtroExpediente: textoBuscar: 'nombreExpediente'"></app-posts-expedientes>
 

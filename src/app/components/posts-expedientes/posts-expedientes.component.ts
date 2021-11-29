@@ -13,10 +13,7 @@ export class PostsExpedientesComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.judgments);
-
-  }
+  ngOnInit() {}
 
   onSearchChange(event: any) {
     this.textoBuscar = event.detail.value;

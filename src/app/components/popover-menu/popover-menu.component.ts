@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
-import { DetalleExpedienteComponent } from '../detalle-expediente/detalle-expediente.component';
-import { FormExpedienteComponent } from '../form-expediente/form-expediente.component';
+import { Router } from '@angular/router';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { DataLocalService } from '../../services/data-local.service';
+import { DetalleExpedienteComponent } from '../detalle-expediente/detalle-expediente.component';
+import { FormUpdateCaseFileComponent } from '../form-update-case-file/form-update-case-file.component';
+import { Expediente } from '../../interfaces/cargar-expedientes';
 
 @Component({
   selector: 'app-popover-menu',
@@ -13,12 +15,14 @@ import { DataLocalService } from '../../services/data-local.service';
 export class PopoverMenuComponent implements OnInit {
 
   @Input() id: string; // Enviar info a componente hijo
+  public judgments  : Expediente[] = [];
 
   constructor(private popoverCtrl: PopoverController,
               private modalCtrl: ModalController,
               private alertCtrl: AlertController,
               private expedientesService: ExpedientesService,
-              private dataLocalServie: DataLocalService) { }
+              private dataLocalServie: DataLocalService,
+              private route: Router) { }
 
   ngOnInit() {}
 
@@ -39,7 +43,8 @@ export class PopoverMenuComponent implements OnInit {
   async actualizar(id: string) {
 
     const modal = await this.modalCtrl.create({
-      component: FormExpedienteComponent,
+      //component: FormExpedienteComponent, // Cambiar a nuevo formulario
+      component: FormUpdateCaseFileComponent,
       componentProps: {
         id
       }
@@ -69,7 +74,7 @@ export class PopoverMenuComponent implements OnInit {
             this.expedientesService.deleteExpediente(id)
               .subscribe(resp =>{
                 console.log('Respuesta al eliminar expediente:',resp);
-                this.dataLocalServie.presentToastWithOptions('Se eliminó el expediente de forma permanente');
+                this.dataLocalServie.presentToastWithOptions('Se eliminó el expediente');
               });
           }
         }

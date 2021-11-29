@@ -1,25 +1,24 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { Cliente } from '../../pages/models/cliente';
+import { Contacto } from '../../pages/models/contacto';
+import { Expediente } from '../../pages/models/expediente';
 import { DataLocalService } from '../../services/data-local.service';
 import { ContactosService } from '../../services/contactos.service';
 import { ClientesService } from '../../services/clientes.service';
 import { ExpedientesService } from '../../services/expedientes.service';
-import { Contacto } from '../../pages/models/contacto';
-import { Cliente } from '../../pages/models/cliente';
-import { Expediente } from '../../pages/models/expediente';
-import { ModalController } from '@ionic/angular';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-form-expediente',
-  templateUrl: './form-expediente.component.html',
-  styleUrls: ['./form-expediente.component.scss'],
+  selector: 'app-form-update-case-file',
+  templateUrl: './form-update-case-file.component.html',
+  styleUrls: ['./form-update-case-file.component.scss'],
 })
-export class FormExpedienteComponent implements OnInit {
+export class FormUpdateCaseFileComponent implements OnInit {
 
   @Input() id: string;
   @ViewChild('formJudgment') formJudgment!: NgForm;
-  loading: HTMLIonLoadingElement;
 
   public judgmentForm  : FormGroup;
   public tipos         : string[]     = [];
@@ -30,14 +29,14 @@ export class FormExpedienteComponent implements OnInit {
   public colaboradores : Contacto[]   = [];
   public contacts      : Contacto[]   = [];
   public clients       : Cliente[]    = [];
-  public expedienteSeleccionado: Expediente;
+  public expediente    : Expediente;
 
   constructor(private formBuilder: FormBuilder,
               private dataLocalService: DataLocalService,
               private contactosService: ContactosService,
               private clientesService: ClientesService,
               private expedientesService: ExpedientesService,
-              public modalCtrl: ModalController) { }
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
 
@@ -49,10 +48,10 @@ export class FormExpedienteComponent implements OnInit {
 
     this.judgmentForm = this.formBuilder.group({
 
-      nombreExpediente   : ['Demanda pensión alimenticia'],
-      numExpediente      : ['027/11/2021'],
-      cuantia            : ['1000'],
-      sintesisAsunto     : ['Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.'],
+      nombreExpediente   : [''],
+      numExpediente      : [''],
+      cuantia            : [''],
+      sintesisAsunto     : [''],
       nombreAbogado      : [''],
       nombreContraparte  : [''],
       institucionJudicial: [''],
@@ -88,7 +87,7 @@ export class FormExpedienteComponent implements OnInit {
         nombreCliente: { _id }
       } = judgment;
 
-      this.expedienteSeleccionado = judgment;
+      this.expediente = judgment;
       this.judgmentForm.setValue({
         nombreExpediente,
         numExpediente,
@@ -137,33 +136,24 @@ export class FormExpedienteComponent implements OnInit {
     });
   }
 
+
   saveData() {
 
-    if (this.expedienteSeleccionado) {
+    if (this.expediente) {
       const data = {
         ...this.judgmentForm.value,
-        _id: this.expedienteSeleccionado._id
+        _id: this.expediente._id
       }
       // Actualizar información del expediente
       this.expedientesService.updateExpediente(data).subscribe(resp => {
         this.judgmentForm.reset();
         this.dismissModal();
-        this.dataLocalService.presentToastWithOptions('Información de expediente actualizada');
-      }, (err) => {
-        this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
-        return err;
-      });
-    }else{
-      // Crear nuevo expediente
-      this.expedientesService.createExpediente(this.judgmentForm.value).subscribe((resp: any) => {
-
-        this.dataLocalService.presentToastWithOptions('Se ha creado un nuevo expediente');
+        this.dataLocalService.presentToastWithOptions('Se actualizó la información');
       }, (err) => {
         this.dataLocalService.presentToast('Al parecer ocurrio un error técnico');
         return err;
       });
     }
-
   }
 
   async dismissModal() {

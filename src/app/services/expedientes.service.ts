@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CargarExpediente } from '../interfaces/cargar-expedientes';
-import { ExpedienteForm } from '../interfaces/expediente-form';
 import { Expediente } from '../pages/models/expediente';
 
 const URL = environment.url;
@@ -14,7 +13,7 @@ const URL = environment.url;
 export class ExpedientesService {
 
   expedientePost = 0;
-  nuevoExpediente = new EventEmitter<Expediente>();
+  nuevoPost = new EventEmitter<Expediente>();
 
   private _tipos   : string[] = ['Administrativo', 'Civil', 'Laboral', 'Mercantil', 'Penal'];
   private _materias: string[] = ['Amparo', 'Civil', 'Ejecutivo Mercantil', 'Familiar', 'Inmobiliario', 'Laboral', 'Mercantil', 'Penal'];
@@ -26,7 +25,7 @@ export class ExpedientesService {
   get materias():string[] { return [...this._materias]; }
 
   // Obtener expedientes
-  getExpedientes(pull: boolean = false) {
+  getFilesCases(pull: boolean = false) {
 
     if (pull) {
       this.expedientePost = 0;
@@ -34,30 +33,9 @@ export class ExpedientesService {
 
     this.expedientePost ++;
 
-    const url = `${ URL }/expedientes`;
+    const url = `${ URL }/expedientes/?pagina=${this.expedientePost}`;
 
-    return this.http.get<CargarExpediente>(url).pipe(map(resp => {
-
-      const judgments = resp.judgments.map(
-        judgment => new Expediente(
-          judgment.nombreExpediente,
-          judgment.numExpediente,
-          judgment.cuantia,
-          judgment.sintesisAsunto,
-          judgment.nombreAbogado,
-          judgment.nombreContraparte,
-          judgment.institucionJudicial,
-          judgment.tipo,
-          judgment.materia,
-          judgment.nombreCliente,
-          judgment._id
-        ));
-
-        return {
-          total: resp.total,
-          judgments
-        }
-    }));
+    return this.http.get<CargarExpediente>(url)
   }
 
   // Obtener expediente por su ID
@@ -70,12 +48,18 @@ export class ExpedientesService {
   }
 
   // Crear expediente
-  createExpediente(formData: ExpedienteForm) {
+  createFileCase(post) {
 
     const url = `${ URL }/expedientes`;
 
-    return this.http.post(url, formData);
+    return new Promise(resolve => {
 
+      this.http.post(url, post).subscribe(resp => {
+        console.log('Respuesta promesa:',resp);
+        this.nuevoPost.emit(resp['judgment']);
+        resolve(true);
+      });
+    });
   }
 
   // Actualizar información de expediente
