@@ -1,0 +1,59 @@
+<body>
+  <ion-app>
+    <app-header-close></app-header-close>
+    <ion-item color="primary">
+      <ion-icon slot="start" name="bulb"></ion-icon>
+      <ion-label>TAREA</ion-label>
+    </ion-item>
+    <ion-content fullscreen>
+      <ion-list lines="full" class="ion-no-margin">
+        <ion-item lines="full">
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input type="text"
+                     placeholder="Nombre"
+                     [(ngModel)]="post.titulo_tarea"
+                     required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">Estado</ion-label>
+            <ion-select value=""
+                        placeholder="Seleccione una opción">
+              <ion-select-option value="pending">Pendiente</ion-select-option>
+              <ion-select-option value="inProgress">En progreso</ion-select-option>
+              <ion-select-option value="completed">Completado</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">Prioridad</ion-label>
+            <ion-select value=""
+                        placeholder="Seleccione una opción">
+              <ion-select-option value="pending">Baja</ion-select-option>
+              <ion-select-option value="inProgress">Media</ion-select-option>
+              <ion-select-option value="completed">Alta</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-button (click)="opciones()" slot="end" fill="clear">
+            <ion-icon slot="end" name="attach-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+    <ion-toolbar>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="dismissModal()" expand="block" color="secondary">
+            <ion-icon slot="start" name="close-circle"></ion-icon>
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="crearTarea()" expand="block" color="secondary">
+            <ion-icon slot="start" name="save"></ion-icon>
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-app>
+</body>

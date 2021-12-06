@@ -32,6 +32,8 @@ export class ContactosPage implements OnInit {
   }
 
   segmentChanged(event) {
+    console.log(event);
+
 
     this.tipo = event.detail.value;
 

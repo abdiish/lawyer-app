@@ -12,7 +12,7 @@
   {
     "icon": "time-outline",
     "name": "Tareas",
-    "redirectTo": ""
+    "redirectTo": "/tareas"
   },
   {
     "icon": "people-outline",

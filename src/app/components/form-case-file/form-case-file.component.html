@@ -86,24 +86,22 @@
           </ion-item>
         </ion-list>
     </ion-content>
-    <ion-footer no-border>
-      <ion-toolbar>
-        <ion-row>
-          <ion-col>
-            <ion-button (click)="dismissModal()" expand="block" color="secondary">
-              <ion-icon slot="start" name="close-circle"></ion-icon>
-              Cancelar
-            </ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button (click)="crearPost()" expand="block" color="secondary">
-              <ion-icon slot="start" name="save"></ion-icon>
-              Guardar
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-toolbar>
-    </ion-footer>
+    <ion-toolbar>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="dismissModal()" expand="block" color="secondary">
+            <ion-icon slot="start" name="close-circle"></ion-icon>
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="crearPost()" expand="block" color="secondary">
+            <ion-icon slot="start" name="save"></ion-icon>
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
   </ion-app>
 </body>
 

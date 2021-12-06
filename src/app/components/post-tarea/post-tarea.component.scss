@@ -1,0 +1,25 @@
+ion-card-content {
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+}
+
+ion-chip {
+  --background: #fafafa !important
+}
+
+label, .label-icon {
+  color: #fafafa;
+}
+
+.post-tarea {
+  margin-bottom: -30px;
+  border-left: 3px solid #aa00ff;
+  -webkit-box-shadow: 0 2px 5px -5px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 10px -5px rgba(0,0,0,0.5);
+}
+
+.avatar-img-title {
+  display: flex;
+}
+
+

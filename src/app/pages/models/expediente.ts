@@ -1,8 +1,8 @@
 import { Cliente } from "./cliente";
 export class Expediente {
 
-  public nombreExpediente?    : string;
-  public numExpediente?       : string;
+  public nombreExpediente?   : string;
+  public numExpediente?      : string;
   public cuantia?            : number;
   public sintesisAsunto?     : string;
   public nombreAbogado?      : string;
@@ -15,8 +15,8 @@ export class Expediente {
 
   constructor(
 
-    nombreExpediente?    : string,
-    numExpediente?       : string,
+    nombreExpediente?   : string,
+    numExpediente?      : string,
     cuantia?            : number,
     sintesisAsunto?     : string,
     nombreAbogado?      : string,

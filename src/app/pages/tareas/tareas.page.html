@@ -1,0 +1,66 @@
+<app-header-menu titulo="Tareas"></app-header-menu>
+
+<ion-searchbar placeholder="Buscar tarea"
+               inputmode="text"
+               (ionChange)="onSearchChange($event)"
+               debounce="250"
+               animated></ion-searchbar>
+
+<ion-item color="primary">
+  <ion-buttons slot="end">
+    <ion-button >
+      <ion-icon slot="icon-only" name="filter"></ion-icon>
+    </ion-button>
+    <ion-button  buttonType="solid"
+                 size="small"
+                 (click)="formTarea()">
+                  Nuevo
+    </ion-button>
+  </ion-buttons>
+  <div class="label-badge">
+    <ion-label>
+        {{ titleLabel }}
+    </ion-label>
+    <ion-badge color="light" mode="md">{{ numTareas }}</ion-badge>
+  </div>
+</ion-item>
+
+<ion-content>
+
+  <!-- Renderizar lista de tareas -->
+  <app-posts-tareas [tareas]="tareas | filtroTareas: textoBuscar: 'descripcionTarea' | filtroTareas: statusTarea: 'statusTarea'"></app-posts-tareas>
+
+  <ion-button class="btn-new-task"
+              buttonType="clear"
+              (click)="formTarea()">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Nuevo
+  </ion-button>
+
+  <!-- Refresher-->
+  <!-- <ion-refresher slot="fixed"  (ionRefresh)="recargar($event)">
+    <ion-refresher-content refreshingSpinner="circular"></ion-refresher-content>
+  </ion-refresher> -->
+</ion-content>
+
+<ion-segment value=""
+             color="secondary"
+             scrollable="true"
+             (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="">
+    <ion-icon name="file-tray-full"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="noStatus">
+    <ion-icon name="folder-open"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="pending">
+    <ion-icon name="alarm"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="inProgress">
+    <ion-icon name="timer"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="completed">
+    <ion-icon name="trophy"></ion-icon>
+  </ion-segment-button>
+</ion-segment>
+

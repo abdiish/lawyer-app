@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { PopoverMenuComponent } from '../popover-menu/popover-menu.component';
@@ -12,7 +13,8 @@ export class PostExpedienteComponent implements OnInit {
 
   @Input() judgment: Expediente = {};
 
-  constructor(private popoverCtrl: PopoverController) { }
+  constructor(private popoverCtrl: PopoverController,
+              private router: Router) { }
 
   ngOnInit() {}
 
@@ -29,6 +31,16 @@ export class PostExpedienteComponent implements OnInit {
     });
 
     await popover.present();
+
+  }
+
+  mostrarTareas(id: string) {
+    console.log('Id de expediente/tareas:',id);
+    this.router.navigateByUrl('/tareas');
+  }
+
+  mostrarDocumentos(id: string) {
+    console.log('Id de expediente/documentos:',id);
 
   }
 

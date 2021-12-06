@@ -25,16 +25,24 @@
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <div class="documents">
+        <!-- <div class="documents">
           <ion-note color="primary" mode="ios" class="i-note">0</ion-note>
           <h3><sub>Documentos</sub></h3>
-        </div>
+        </div> -->
+        <ion-button fill="clear" (click)=" mostrarDocumentos(judgment._id)">
+          <ion-note>0</ion-note>
+          Documentos
+        </ion-button>
       </ion-col>
       <ion-col size="6">
-        <div class="tasks">
+        <!-- <div class="tasks">
           <ion-note color="primary" mode="ios">0</ion-note>
           <h3><sub>Tareas</sub></h3>
-        </div>
+        </div> -->
+        <ion-button fill="clear" (click)="mostrarTareas(judgment._id)">
+          <ion-note>0</ion-note>
+          Tareas
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-card-content>

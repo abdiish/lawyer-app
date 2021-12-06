@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FiltroPipe } from './filtro.pipe';
 import { ImagenPipe } from './imagen.pipe';
 import { FiltroExpedientePipe } from './filtro-expediente.pipe';
+import { FiltroTareasPipe } from './filtro-tareas.pipe';
 
 
 
@@ -9,12 +10,14 @@ import { FiltroExpedientePipe } from './filtro-expediente.pipe';
   declarations: [
     FiltroPipe,
     ImagenPipe,
-    FiltroExpedientePipe
+    FiltroExpedientePipe,
+    FiltroTareasPipe
   ],
   exports: [
     FiltroPipe,
     ImagenPipe,
-    FiltroExpedientePipe
+    FiltroExpedientePipe,
+    FiltroTareasPipe
   ]
 
 })

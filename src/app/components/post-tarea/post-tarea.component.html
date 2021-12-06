@@ -1,0 +1,43 @@
+<ion-card-content>
+  <div class="post-tarea">
+    <ion-item lines="none">
+      <ion-icon slot="end"
+                name="ellipsis-horizontal-outline"
+                (click)="presentPopover($event)"></ion-icon>
+      <ion-card-subtitle>...</ion-card-subtitle>
+    </ion-item>
+    <ion-item lines="none">
+      <div>
+        <ion-text autocapitalize="true">
+          <p>{{ tarea.descripcionTarea}}</p>
+        </ion-text>
+      </div>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-chip mode="md">
+        <ion-avatar>
+          <img [src]="tarea.usuario.img"/>
+        </ion-avatar>
+        <ion-label><sub>{{ tarea.usuario.nombre }}</sub></ion-label>
+      </ion-chip>
+      <ion-badge *ngIf="tarea.prioridadTarea === 'high'" color="danger" slot="end" mode="ios">
+        <ion-text>
+          <label>ALTA</label>
+        </ion-text>
+        <ion-icon name="arrow-up" class="label-icon"></ion-icon>
+      </ion-badge>
+      <ion-badge *ngIf="tarea.prioridadTarea === 'low'" color="success" slot="end" mode="ios">
+        <ion-text>
+          <label>BAJA</label>
+        </ion-text>
+        <ion-icon name="arrow-down" class="label-icon"></ion-icon>
+      </ion-badge>
+      <ion-badge *ngIf="tarea.prioridadTarea === 'medium'" color="warning" slot="end" mode="ios">
+        <ion-text>
+          <label>MEDIA</label>
+        </ion-text>
+        <ion-icon name="git-commit" class="label-icon"></ion-icon>
+      </ion-badge>
+    </ion-item>
+  </div>
+</ion-card-content>
