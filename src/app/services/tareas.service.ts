@@ -21,7 +21,7 @@ export class TareasService {
               private usuarioService: UsuarioService) { }
 
   // Obtener tareas
-  getTasks() {
+  getTasks(id: string) {
 
 
     // if (pull) {
@@ -30,7 +30,7 @@ export class TareasService {
 
     // this.tareaPost ++;
 
-    const url = `${ URL }/tareas`;
+    const url = `${ URL }/tareas/${ id }`;
 
     return this.http.get<cargarTarea>(url);
 

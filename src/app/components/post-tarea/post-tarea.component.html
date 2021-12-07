@@ -4,22 +4,27 @@
       <ion-icon slot="end"
                 name="ellipsis-horizontal-outline"
                 (click)="presentPopover($event)"></ion-icon>
-      <ion-card-subtitle>...</ion-card-subtitle>
+      <ion-card-subtitle>{{ tarea.tituloTarea }}</ion-card-subtitle>
     </ion-item>
     <ion-item lines="none">
       <div>
         <ion-text autocapitalize="true">
-          <p>{{ tarea.descripcionTarea}}</p>
+          <p>{{ tarea.descripcionTarea | slice: 0:70 }} {{ (tarea.descripcionTarea.length > 70) ? '...' : ''}}</p>
         </ion-text>
       </div>
     </ion-item>
     <ion-item lines="none">
+
       <ion-chip mode="md">
         <ion-avatar>
-          <img [src]="tarea.usuario.img"/>
+          <img [src]="tarea.usuario.img | imagen: 'usuarios'"/>
         </ion-avatar>
-        <ion-label><sub>{{ tarea.usuario.nombre }}</sub></ion-label>
+        <ion-label><sub>{{ tarea.usuario.nombre | slice: 0:17 }} {{ (tarea.usuario.nombre.length > 17) ? '...' : ''}}</sub></ion-label>
       </ion-chip>
+
+      <ion-icon name="document-attach-outline" class="icon-num-documents"></ion-icon>
+      <p class="num-documentos">{{ tarea.documentos.length }}</p>
+
       <ion-badge *ngIf="tarea.prioridadTarea === 'high'" color="danger" slot="end" mode="ios">
         <ion-text>
           <label>ALTA</label>
@@ -36,7 +41,6 @@
         <ion-text>
           <label>MEDIA</label>
         </ion-text>
-        <ion-icon name="git-commit" class="label-icon"></ion-icon>
       </ion-badge>
     </ion-item>
   </div>

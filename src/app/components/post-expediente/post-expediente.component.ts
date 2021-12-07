@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Expediente } from '../../interfaces/cargar-expedientes';
@@ -35,8 +35,7 @@ export class PostExpedienteComponent implements OnInit {
   }
 
   mostrarTareas(id: string) {
-    console.log('Id de expediente/tareas:',id);
-    this.router.navigateByUrl('/tareas');
+    this.router.navigate(['/tareas', id]);
   }
 
   mostrarDocumentos(id: string) {

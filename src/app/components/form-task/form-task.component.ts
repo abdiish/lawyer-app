@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { TareasService } from '../../services/tareas.service';
 import { DataLocalService } from '../../services/data-local.service';
+import { UsuarioService } from '../../services/usuario.service';
+import { Usuario } from '../../interfaces/cargar-usuarios';
 
 @Component({
   selector: 'app-form-task',
@@ -10,19 +12,25 @@ import { DataLocalService } from '../../services/data-local.service';
 })
 export class FormTaskComponent implements OnInit {
 
+  public tempImages: string[]  = [];
+  public usuarios  : Usuario[] = [];
+
   post = {
-    titulo_tarea: '',
-    descripcion : '',
-    fecha_limite: '',
-    responsable : '',
-    status      : '',
+    tituloTarea      : '',
+    descripcionTarea : '',
+    statusTarea      : '',
+    prioridadTarea   : '',
+    usuario          : ''
   }
 
   constructor(private tareasService: TareasService,
+              private usuarioService: UsuarioService,
               private modalContrl: ModalController,
               private dataLocalService: DataLocalService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cargarUsuarios();
+  }
 
   // Crear tarea
   async crearTarea(){
@@ -31,6 +39,16 @@ export class FormTaskComponent implements OnInit {
 
   opciones() {
     this.dataLocalService.presentActionSheet();
+  }
+
+  // Cargar usuarios
+  cargarUsuarios() {
+
+    this.usuarioService.getUsuarios().subscribe(({usuarios}) => {
+      console.log(usuarios);
+      this.usuarios = usuarios;
+    });
+
   }
 
   async dismissModal() {

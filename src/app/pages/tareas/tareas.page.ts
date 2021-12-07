@@ -3,6 +3,7 @@ import { Tarea } from '../models/tarea';
 import { TareasService } from '../../services/tareas.service';
 import { IonSegment, ModalController } from '@ionic/angular';
 import { FormTaskComponent } from '../../components/form-task/form-task.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tareas',
@@ -12,9 +13,9 @@ import { FormTaskComponent } from '../../components/form-task/form-task.componen
 export class TareasPage implements OnInit {
 
   @ViewChild(IonSegment, {static: true}) segment: IonSegment;
-  @Input() id: string;
 
   public habilitado = true;
+  public id          : string;
   public statusTarea : string;
   public prioridad   : string;
   public numTareas   : number;
@@ -27,11 +28,19 @@ export class TareasPage implements OnInit {
   public inProgress  : Tarea[] = [];
   public completed   : Tarea[] = [];
 
+
   constructor(private tareasService: TareasService,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.siguientes();
+
+    this.activatedRoute.params.subscribe( prm  => {
+      console.log('Id del expediente:',prm.id);
+      this.id = prm.id;
+    });
+
+    this.siguientes(this.id);
   }
 
   // Refresh
@@ -45,8 +54,8 @@ export class TareasPage implements OnInit {
   // }
 
   // Cargar tareas
-  siguientes() {
-    this.tareasService.getTasks().subscribe(resp => {
+  siguientes(id: string) {
+    this.tareasService.getTasks(id).subscribe(resp => {
       console.log('Respuesta, siguientes/tareas:',resp);
       this.load = true;
       this.tareas.push(...resp.tareas);

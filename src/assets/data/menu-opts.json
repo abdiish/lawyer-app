@@ -10,11 +10,6 @@
     "redirectTo": "/expedientes"
   },
   {
-    "icon": "time-outline",
-    "name": "Tareas",
-    "redirectTo": "/tareas"
-  },
-  {
     "icon": "people-outline",
     "name": "Clientes",
     "redirectTo": "/clientes"

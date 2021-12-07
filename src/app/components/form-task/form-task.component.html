@@ -2,7 +2,6 @@
   <ion-app>
     <app-header-close></app-header-close>
     <ion-item color="primary">
-      <ion-icon slot="start" name="bulb"></ion-icon>
       <ion-label>TAREA</ion-label>
     </ion-item>
     <ion-content fullscreen>
@@ -10,14 +9,30 @@
         <ion-item lines="full">
           <ion-label position="stacked">Título</ion-label>
           <ion-input type="text"
-                     placeholder="Nombre"
-                     [(ngModel)]="post.titulo_tarea"
+                     placeholder="p.ej. Presentar recurso de revisión"
+                     [(ngModel)]="post.tituloTarea"
                      required></ion-input>
         </ion-item>
         <ion-item lines="full">
-          <ion-label position="stacked">Estado</ion-label>
+          <ion-label position="stacked">Crear una nota</ion-label>
+          <ion-textarea type="text"
+                     placeholder="p.ej. Interponer un recurso de revisión"
+                     [(ngModel)]="post.descripcionTarea"
+                     required></ion-textarea>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">Colaborador</ion-label>
             <ion-select value=""
                         placeholder="Seleccione una opción">
+              <ion-select-option *ngFor="let usuario of usuarios"
+                                  [value]="usuario.uid">{{ usuario.nombre }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">Estado</ion-label>
+            <ion-select value="noStatus"
+                        placeholder="Seleccione una opción">
+              <ion-select-option value="noStatus">Sin estado</ion-select-option>
               <ion-select-option value="pending">Pendiente</ion-select-option>
               <ion-select-option value="inProgress">En progreso</ion-select-option>
               <ion-select-option value="completed">Completado</ion-select-option>
@@ -25,11 +40,11 @@
         </ion-item>
         <ion-item lines="full">
           <ion-label position="stacked">Prioridad</ion-label>
-            <ion-select value=""
+            <ion-select value="low"
                         placeholder="Seleccione una opción">
-              <ion-select-option value="pending">Baja</ion-select-option>
-              <ion-select-option value="inProgress">Media</ion-select-option>
-              <ion-select-option value="completed">Alta</ion-select-option>
+              <ion-select-option value="low">Baja</ion-select-option>
+              <ion-select-option value="medium">Media</ion-select-option>
+              <ion-select-option value="high">Alta</ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item lines="none">

@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Usuario } from '../interfaces/login-register';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
+import { cargarUsuarios } from '../interfaces/cargar-usuarios';
 
 const URL = environment.url;
 
@@ -49,4 +50,15 @@ export class UsuarioService {
     this.token = token;
     await this.storage.set('token', token);
   }
+
+  // Cargar usuarios
+  getUsuarios() {
+
+    const url = `${ URL }/usuarios`;
+
+    return this.http.get<cargarUsuarios>(url);
+
+
+  }
+
 }
