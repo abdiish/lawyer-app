@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Tarea } from '../models/tarea';
 import { TareasService } from '../../services/tareas.service';
-import { IonSegment, ModalController } from '@ionic/angular';
+import { IonSegment, LoadingController, ModalController } from '@ionic/angular';
 import { FormTaskComponent } from '../../components/form-task/form-task.component';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TareasPage implements OnInit {
 
   @ViewChild(IonSegment, {static: true}) segment: IonSegment;
+  @Output() numTasks: EventEmitter<number>;
 
   public habilitado = true;
   public id          : string;
@@ -31,7 +32,10 @@ export class TareasPage implements OnInit {
 
   constructor(private tareasService: TareasService,
               private modalCtrl: ModalController,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private loadingCtrl: LoadingController) {
+                this.numTasks = new EventEmitter();
+               }
 
   ngOnInit() {
 
@@ -54,12 +58,19 @@ export class TareasPage implements OnInit {
   // }
 
   // Cargar tareas
-  siguientes(id: string) {
+  async siguientes(id: string) {
+    const loading = await this.loadingCtrl.create({
+      message:'Cargando tareas...'
+    });
+    await loading.present();
+
     this.tareasService.getTasks(id).subscribe(resp => {
       console.log('Respuesta, siguientes/tareas:',resp);
+      loading.dismiss();
       this.load = true;
       this.tareas.push(...resp.tareas);
       this.numTareas = this.tareas.length;
+      this.numTasks.emit(this.numTareas);
 
       resp.tareas.forEach(element => {
 
@@ -143,5 +154,15 @@ export class TareasPage implements OnInit {
 
     this.textoBuscar = event.detail.value;
 
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!', role, data);
   }
 }

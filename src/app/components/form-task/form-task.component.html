@@ -2,73 +2,53 @@
   <ion-app>
     <app-header-close></app-header-close>
     <ion-item color="primary">
-      <ion-label>TAREA</ion-label>
+      <ion-icon name="bulb-outline" slot="start"></ion-icon>
+      <ion-label>Nota</ion-label>
     </ion-item>
     <ion-content fullscreen>
-      <ion-list lines="full" class="ion-no-margin">
-        <ion-item lines="full">
-          <ion-label position="stacked">Título</ion-label>
-          <ion-input type="text"
-                     placeholder="p.ej. Presentar recurso de revisión"
-                     [(ngModel)]="post.tituloTarea"
-                     required></ion-input>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label position="stacked">Crear una nota</ion-label>
-          <ion-textarea type="text"
-                     placeholder="p.ej. Interponer un recurso de revisión"
-                     [(ngModel)]="post.descripcionTarea"
-                     required></ion-textarea>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label position="stacked">Colaborador</ion-label>
-            <ion-select value=""
-                        placeholder="Seleccione una opción">
-              <ion-select-option *ngFor="let usuario of usuarios"
-                                  [value]="usuario.uid">{{ usuario.nombre }}</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label position="stacked">Estado</ion-label>
-            <ion-select value="noStatus"
-                        placeholder="Seleccione una opción">
-              <ion-select-option value="noStatus">Sin estado</ion-select-option>
-              <ion-select-option value="pending">Pendiente</ion-select-option>
-              <ion-select-option value="inProgress">En progreso</ion-select-option>
-              <ion-select-option value="completed">Completado</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label position="stacked">Prioridad</ion-label>
-            <ion-select value="low"
-                        placeholder="Seleccione una opción">
-              <ion-select-option value="low">Baja</ion-select-option>
-              <ion-select-option value="medium">Media</ion-select-option>
-              <ion-select-option value="high">Alta</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-button (click)="opciones()" slot="end" fill="clear">
-            <ion-icon slot="end" name="attach-outline"></ion-icon>
-          </ion-button>
-        </ion-item>
+      <ion-list class="ion-no-margin">
+        <ion-card>
+          <ion-card-content>
+            <ion-item lines="none">
+              <ion-input type="text"
+                         placeholder="Título"
+                         [(ngModel)]="post.tituloTarea"
+                         required></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-textarea type="text"
+                            placeholder="Crear una nota"
+                            [(ngModel)]="post.descripcionTarea"
+                            required></ion-textarea>
+
+            </ion-item>
+            <ion-item lines="none">
+              <ion-button fill="clear" slot="end" class="btn-files">
+                <ion-icon slot="icon-only"
+                          name="attach-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-content>
+            <ion-item lines="none">
+              <ion-avatar slot="start">
+                <img  src="../../../assets/no-img.png">
+              </ion-avatar>
+              <ion-label>
+                <h3>Nombre del usuario</h3>
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
       </ion-list>
+
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="secondary">
+          <ion-icon name="cloud-upload"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
-    <ion-toolbar>
-      <ion-row>
-        <ion-col>
-          <ion-button (click)="dismissModal()" expand="block" color="secondary">
-            <ion-icon slot="start" name="close-circle"></ion-icon>
-            Cancelar
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button (click)="crearTarea()" expand="block" color="secondary">
-            <ion-icon slot="start" name="save"></ion-icon>
-            Guardar
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-toolbar>
   </ion-app>
 </body>

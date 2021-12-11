@@ -1,66 +1,56 @@
-<app-header-menu titulo="Tareas"></app-header-menu>
+<body>
+  <ion-app>
+    <app-header-menu titulo="Tareas"></app-header-menu>
 
-<ion-searchbar placeholder="Buscar tarea"
-               inputmode="text"
-               (ionChange)="onSearchChange($event)"
-               debounce="250"
-               animated></ion-searchbar>
+    <ion-searchbar placeholder="Buscar tarea" inputmode="text" (ionChange)="onSearchChange($event)" debounce="250" animated></ion-searchbar>
 
-<ion-item color="primary">
-  <ion-buttons slot="end">
-    <ion-button >
-      <ion-icon slot="icon-only" name="filter"></ion-icon>
-    </ion-button>
-    <ion-button  buttonType="solid"
-                 size="small"
-                 (click)="formTarea()">
-                  Nuevo
-    </ion-button>
-  </ion-buttons>
-  <div class="label-badge">
-    <ion-label>
-        {{ titleLabel }}
-    </ion-label>
-    <ion-badge color="light" mode="md">{{ numTareas }}</ion-badge>
-  </div>
-</ion-item>
+    <ion-item color="primary">
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="funnel"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-label>{{ titleLabel }}</ion-label>
+      <ion-label>
+        <ion-badge color="light" mode="md">{{ numTareas }}</ion-badge>
+      </ion-label>
+    </ion-item>
 
-<ion-content>
+    <ion-content>
 
-  <!-- Renderizar lista de tareas -->
-  <app-posts-tareas [tareas]="tareas | filtroTareas: textoBuscar: 'descripcionTarea' | filtroTareas: statusTarea: 'statusTarea'"></app-posts-tareas>
+      <!-- Renderizar lista de tareas -->
+      <app-posts-tareas [tareas]="tareas | filtroTareas: textoBuscar: 'tituloTarea' | filtroTareas: statusTarea: 'statusTarea'">
+      </app-posts-tareas>
+      <div style="margin-bottom: 85px;"></div>
 
-  <ion-button class="btn-new-task"
-              buttonType="clear"
-              (click)="formTarea()">
-    <ion-icon slot="start" name="add"></ion-icon>
-    Nuevo
-  </ion-button>
+      <!-- Refresher-->
+      <!-- <ion-refresher slot="fixed"  (ionRefresh)="recargar($event)">
+          <ion-refresher-content refreshingSpinner="circular"></ion-refresher-content>
+        </ion-refresher> -->
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="secondary" (click)="formTarea()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
 
-  <!-- Refresher-->
-  <!-- <ion-refresher slot="fixed"  (ionRefresh)="recargar($event)">
-    <ion-refresher-content refreshingSpinner="circular"></ion-refresher-content>
-  </ion-refresher> -->
-</ion-content>
+    </ion-content>
 
-<ion-segment value=""
-             color="secondary"
-             scrollable="true"
-             (ionChange)="segmentChanged($event)">
-  <ion-segment-button value="">
-    <ion-icon name="file-tray-full-outline"></ion-icon>
-  </ion-segment-button>
-  <ion-segment-button value="noStatus">
-    <ion-icon name="folder-open-outline"></ion-icon>
-  </ion-segment-button>
-  <ion-segment-button value="pending">
-    <ion-icon name="alarm-outline"></ion-icon>
-  </ion-segment-button>
-  <ion-segment-button value="inProgress">
-    <ion-icon name="timer-outline"></ion-icon>
-  </ion-segment-button>
-  <ion-segment-button value="completed">
-    <ion-icon name="trophy-outline"></ion-icon>
-  </ion-segment-button>
-</ion-segment>
-
+    <ion-segment value="" color="secondary" scrollable="true" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="">
+        <ion-icon name="file-tray-full-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="noStatus">
+        <ion-icon name="folder-open-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="pending">
+        <ion-icon name="alarm-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="inProgress">
+        <ion-icon name="timer-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-icon name="trophy-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-app>
+</body>

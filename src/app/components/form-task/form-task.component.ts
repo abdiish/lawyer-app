@@ -4,6 +4,7 @@ import { TareasService } from '../../services/tareas.service';
 import { DataLocalService } from '../../services/data-local.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../interfaces/cargar-usuarios';
+import Swiper, { FreeMode } from 'swiper';
 
 @Component({
   selector: 'app-form-task',

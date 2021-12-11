@@ -18,6 +18,7 @@ import { PostExpedienteComponent } from './post-expediente/post-expediente.compo
 import { PostsTareasComponent } from './posts-tareas/posts-tareas.component';
 import { PostTareaComponent } from './post-tarea/post-tarea.component';
 import { FormTaskComponent } from './form-task/form-task.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FormTaskComponent } from './form-task/form-task.component';
     FormsModule,
     IonicModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SwiperModule
   ],
   exports: [
     DetalleExpedienteComponent,

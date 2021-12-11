@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { FormCaseFileComponent } from '../../components/form-case-file/form-case-file.component';
@@ -11,17 +11,18 @@ import { FormCaseFileComponent } from '../../components/form-case-file/form-case
 })
 export class ExpedientesPage implements OnInit {
 
-  @Input() id: string;
+  @Input() numTareas: string; // Recibe número de tareas, componente padre
+
   public habilitado = true;
   public textoBuscar: string = '';
   public load       : boolean;
   public judgments  : Expediente[] = [];
 
   constructor(private expedientesService: ExpedientesService,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
-
     this.siguientes();
     this.expedientesService.nuevoPost.subscribe(judgment => {
       console.log('Judgment:' ,judgment);
@@ -42,6 +43,7 @@ export class ExpedientesPage implements OnInit {
   siguientes(event?, pull: boolean = false) {
     this.expedientesService.getFilesCases(pull).subscribe(resp => {
       console.log(resp);
+      this.loadingCtrl.dismiss();
       this.load = true;
       this.judgments.push(...resp.judgments);
 
@@ -68,6 +70,16 @@ export class ExpedientesPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+    });
+    await loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+    // console.log('Loading dismissed!');
   }
 
   }
