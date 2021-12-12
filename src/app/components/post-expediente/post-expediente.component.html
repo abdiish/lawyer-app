@@ -1,49 +1,64 @@
+<ion-card-content>
+  <div class="post-expediente">
+    <ion-item lines="none">
+      <ion-icon slot="end"
+                name="ellipsis-horizontal-outline"
+                (click)="presentPopover($event, judgment._id)"></ion-icon>
+      <div class="border_title_item">
+        <div class="border-title"></div>
+        <ion-card-subtitle>
+          <ion-label>{{ judgment.nombreExpediente }}</ion-label>
+        </ion-card-subtitle>
+      </div>
 
-<ion-card>
-  <ion-item color="primary">
-    <ion-icon slot="end" name="ellipsis-vertical-outline" (click)="presentPopover($event, judgment._id)"></ion-icon>
-    <ion-label>{{ judgment.nombreExpediente }}</ion-label>
-  </ion-item>
-  <ion-card-content>
-    <ion-row>
-      <ion-col size="6">
-        <div>
-          <h3><sub>Cuantía</sub></h3>
-          <ion-text color="primary">
-            <h2>${{ judgment.cuantia | number: '1.2-2' }}</h2>
-          </ion-text>
-        </div>
-      </ion-col>
-      <ion-col size="6">
-        <div>
-          <h3><sub>Número de Expediente</sub></h3>
-          <ion-text color="primary">
-            <h2>{{ judgment.numExpediente }}</h2>
-          </ion-text>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="6">
-        <!-- <div class="documents">
-          <ion-note color="primary" mode="ios" class="i-note">0</ion-note>
-          <h3><sub>Documentos</sub></h3>
-        </div> -->
-        <ion-button fill="clear" (click)=" mostrarDocumentos(judgment._id)">
-          <ion-note>0</ion-note>
-          Documentos
-        </ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <!-- <div class="tasks">
-          <ion-note color="primary" mode="ios">0</ion-note>
-          <h3><sub>Tareas</sub></h3>
-        </div> -->
-        <ion-button fill="clear" (click)="mostrarTareas(judgment._id)">
-          <ion-note>0</ion-note>
-          Tareas
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-card-content>
-</ion-card>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6">
+            <div>
+              <h3><sub>Cuantía</sub></h3>
+              <ion-text color="primary">
+                <h2>${{ judgment.cuantia | number: '1.2-2' }}</h2>
+              </ion-text>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div>
+              <h3><sub>Número de Expediente</sub></h3>
+              <ion-text color="primary">
+                <h2>{{ judgment.numExpediente }}</h2>
+              </ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item lines="none">
+     <ion-grid fixed>
+       <ion-row>
+         <ion-col size="6">
+          <ion-button fill="outline"
+                      color="medium"
+                      expand="full"
+                      mode="ios"
+                      (click)="mostrarTareas(judgment._id)">
+            <ion-note>0</ion-note>
+            Documentos
+          </ion-button>
+         </ion-col>
+         <ion-col size="6">
+          <ion-button fill="outline"
+                      color="medium"
+                      expand="full"
+                      mode="ios"
+                      (click)="mostrarTareas(judgment._id)">
+            <ion-note>0</ion-note>
+            Tareas
+          </ion-button>
+         </ion-col>
+       </ion-row>
+     </ion-grid>
+    </ion-item>
+  </div>
+</ion-card-content>

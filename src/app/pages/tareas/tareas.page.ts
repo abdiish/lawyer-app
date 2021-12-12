@@ -60,7 +60,7 @@ export class TareasPage implements OnInit {
   // Cargar tareas
   async siguientes(id: string) {
     const loading = await this.loadingCtrl.create({
-      message:'Cargando tareas...'
+      message:'Cargando...'
     });
     await loading.present();
 

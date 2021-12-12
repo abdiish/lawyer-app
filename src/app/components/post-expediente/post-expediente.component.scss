@@ -6,3 +6,32 @@ ion-note {
   display: flex;
   margin-top: 20px;
 }
+
+ion-card-content {
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+}
+
+.post-expediente {
+  border-radius: 4px;
+  margin-bottom: -30px;
+  border-left: 3px solid #aa00ff;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+
+}
+
+.border-title {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background-color: #64dd17;
+  margin-top: 5px;
+  margin-right: 8px;
+  align-self: start;
+}
+
+.border_title_item {
+  display: flex;
+}

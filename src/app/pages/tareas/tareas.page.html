@@ -19,8 +19,7 @@
     <ion-content>
 
       <!-- Renderizar lista de tareas -->
-      <app-posts-tareas [tareas]="tareas | filtroTareas: textoBuscar: 'tituloTarea' | filtroTareas: statusTarea: 'statusTarea'">
-      </app-posts-tareas>
+      <app-posts-tareas [tareas]="tareas | filtroTareas: textoBuscar: 'tituloTarea' | filtroTareas: statusTarea: 'statusTarea'"></app-posts-tareas>
       <div style="margin-bottom: 85px;"></div>
 
       <!-- Refresher-->
@@ -35,7 +34,7 @@
 
     </ion-content>
 
-    <ion-segment value="" color="secondary" scrollable="true" (ionChange)="segmentChanged($event)">
+    <ion-segment mode="md" value="" color="secondary" scrollable="true" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="">
         <ion-icon name="file-tray-full-outline"></ion-icon>
       </ion-segment-button>

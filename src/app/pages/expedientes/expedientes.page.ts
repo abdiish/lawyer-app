@@ -40,10 +40,17 @@ export class ExpedientesPage implements OnInit {
   }
 
   // Cargar expedientes, uso de promesa
-  siguientes(event?, pull: boolean = false) {
+  async siguientes(event?, pull: boolean = false) {
+
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...'
+    });
+
+    await loading.present();
+
     this.expedientesService.getFilesCases(pull).subscribe(resp => {
       console.log(resp);
-      this.loadingCtrl.dismiss();
+      loading.dismiss();
       this.load = true;
       this.judgments.push(...resp.judgments);
 
@@ -77,9 +84,6 @@ export class ExpedientesPage implements OnInit {
       message: 'Cargando...',
     });
     await loading.present();
-
-    // const { role, data } = await loading.onDidDismiss();
-    // console.log('Loading dismissed!');
   }
 
   }

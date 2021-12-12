@@ -1,22 +1,43 @@
-<app-header-expediente titulo="Expedientes"></app-header-expediente>
 
-<ion-searchbar placeholder="Buscar expediente"
-               inputmode="text"
-               (ionChange)="onSearchChange($event)"
-               debounce="250"
-               animated></ion-searchbar>
+<body>
+  <ion-app>
+    <app-header-expediente titulo="Expedientes"></app-header-expediente>
 
-<ion-content  *ngIf="load">
-   <!-- Refresher-->
-  <ion-refresher slot="fixed"  (ionRefresh)="recargar($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <!--Renderizar expedientes -->
-  <app-posts-expedientes [judgments]="judgments | filtroExpediente: textoBuscar: 'nombreExpediente'"></app-posts-expedientes>
+    <ion-searchbar placeholder="Buscar expediente" inputmode="text" (ionChange)="onSearchChange($event)" debounce="250" animated></ion-searchbar>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary" (click)="formExpediente()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</ion-content>
+    <ion-item color="primary">
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="funnel"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-label>Awesome Label</ion-label>
+    </ion-item>
+
+    <ion-content  *ngIf="load">
+      <!-- Refresher-->
+      <ion-refresher slot="fixed"  (ionRefresh)="recargar($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <!--Renderizar expedientes -->
+      <app-posts-expedientes [judgments]="judgments | filtroExpediente: textoBuscar: 'nombreExpediente'"></app-posts-expedientes>
+      <div style="margin-bottom: 90px;"></div>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="secondary" (click)="formExpediente()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-content>
+    <ion-segment mode="md" value="uno">
+      <ion-segment-button value="uno">
+        <ion-icon name="construct-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="dos">
+        <ion-icon name="timer-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="tres">
+        <ion-icon name="trophy-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-app>
+</body>

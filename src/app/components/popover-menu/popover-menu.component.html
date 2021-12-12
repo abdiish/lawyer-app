@@ -1,24 +1,18 @@
 <ion-list>
-  <ion-list-header>Opciones</ion-list-header>
-
-  <ion-item button (click)="detalle(id)">
+  <ion-item lines="none" button (click)="detalle(id)">
     <ion-icon slot="start" name="eye-outline"></ion-icon>
     <label>Detalles</label>
   </ion-item>
-  <ion-item button (click)="actualizar(id)">
+  <ion-item lines="none" button (click)="actualizar(id)">
     <ion-icon slot="start" name="create-outline"></ion-icon>
     <label>Editar</label>
   </ion-item>
-  <ion-item button>
+  <ion-item lines="none" button>
     <ion-icon slot="start" name="archive-outline"></ion-icon>
     <label>Archivar</label>
   </ion-item>
-  <ion-item button (click)="eliminar(id)">
+  <ion-item lines="none" button (click)="eliminar(id)">
     <ion-icon slot="start" name="trash-outline"></ion-icon>
     <label>Eliminar</label>
-  </ion-item>
-  <ion-item lines="none" button (click)="closePopover()">
-    <ion-icon slot="start" name="close-circle-outline"></ion-icon>
-    <label>Cancelar</label>
   </ion-item>
 </ion-list>

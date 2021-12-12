@@ -24,7 +24,7 @@ export class PostExpedienteComponent implements OnInit {
       component: PopoverMenuComponent,
       event: ev,
       translucent: true,
-      backdropDismiss: false,
+      backdropDismiss: true,
       componentProps: {
         id
       }
