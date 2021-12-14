@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ChangeDetectorRef, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Tarea } from '../models/tarea';
 import { TareasService } from '../../services/tareas.service';
-import { IonSegment, LoadingController, ModalController } from '@ionic/angular';
+import { AnimationController, Animation, IonSegment, LoadingController, ModalController } from '@ionic/angular';
 import { FormTaskComponent } from '../../components/form-task/form-task.component';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TareasPage implements OnInit {
 
-  @ViewChild(IonSegment, {static: true}) segment: IonSegment;
+  //@ViewChild(IonSegment, {static: true}) segment: IonSegment;
   @Output() numTasks: EventEmitter<number>;
 
   public habilitado = true;
@@ -22,7 +22,6 @@ export class TareasPage implements OnInit {
   public numTareas   : number;
   public titleLabel  : string = 'MIS TAREAS';
   public textoBuscar : string = '';
-  public load        : boolean;
   public tareas      : Tarea[] = [];
   public noStatus    : Tarea[] = [];
   public pending     : Tarea[] = [];
@@ -33,8 +32,9 @@ export class TareasPage implements OnInit {
   constructor(private tareasService: TareasService,
               private modalCtrl: ModalController,
               private activatedRoute: ActivatedRoute,
-              private loadingCtrl: LoadingController) {
-                this.numTasks = new EventEmitter();
+              private loadingCtrl: LoadingController,
+              private animationCtrl: AnimationController) {
+                //this.numTasks = new EventEmitter();
                }
 
   ngOnInit() {
@@ -60,17 +60,16 @@ export class TareasPage implements OnInit {
   // Cargar tareas
   async siguientes(id: string) {
     const loading = await this.loadingCtrl.create({
-      message:'Cargando...'
+      message:'Cargando...',
     });
     await loading.present();
 
     this.tareasService.getTasks(id).subscribe(resp => {
       console.log('Respuesta, siguientes/tareas:',resp);
       loading.dismiss();
-      this.load = true;
       this.tareas.push(...resp.tareas);
       this.numTareas = this.tareas.length;
-      this.numTasks.emit(this.numTareas);
+      //this.numTasks.emit(this.numTareas);
 
       resp.tareas.forEach(element => {
 

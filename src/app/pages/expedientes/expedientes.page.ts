@@ -3,6 +3,7 @@ import { LoadingController, ModalController } from '@ionic/angular';
 import { Expediente } from '../../interfaces/cargar-expedientes';
 import { ExpedientesService } from '../../services/expedientes.service';
 import { FormCaseFileComponent } from '../../components/form-case-file/form-case-file.component';
+import { NativePageTransitions, NativeTransitionOptions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 
 @Component({
   selector: 'app-expedientes',
@@ -15,12 +16,12 @@ export class ExpedientesPage implements OnInit {
 
   public habilitado = true;
   public textoBuscar: string = '';
-  public load       : boolean;
   public judgments  : Expediente[] = [];
 
   constructor(private expedientesService: ExpedientesService,
               private modalCtrl: ModalController,
-              private loadingCtrl: LoadingController) { }
+              private loadingCtrl: LoadingController,
+              private nativePageTransitions: NativePageTransitions) { }
 
   ngOnInit() {
     this.siguientes();
@@ -48,10 +49,21 @@ export class ExpedientesPage implements OnInit {
 
     await loading.present();
 
+    let options: NativeTransitionOptions = {
+      direction: 'up',
+      duration: 500,
+      slowdownfactor: 3,
+      slidePixels: 20,
+      androiddelay: 150,
+      iosdelay: 100,
+      fixedPixelsTop: 0,
+      fixedPixelsBottom: 90
+    }
+
     this.expedientesService.getFilesCases(pull).subscribe(resp => {
       console.log(resp);
       loading.dismiss();
-      this.load = true;
+      this.nativePageTransitions.slide(options);
       this.judgments.push(...resp.judgments);
 
       if (event) {

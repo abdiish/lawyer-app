@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
+import { NativePageTransitions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { SwiperModule } from 'swiper/angular';
     ReactiveFormsModule,
     SwiperModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, NativePageTransitions],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

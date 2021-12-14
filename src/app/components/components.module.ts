@@ -19,10 +19,12 @@ import { PostsTareasComponent } from './posts-tareas/posts-tareas.component';
 import { PostTareaComponent } from './post-tarea/post-tarea.component';
 import { FormTaskComponent } from './form-task/form-task.component';
 import { SwiperModule } from 'swiper/angular';
+import { EmptyDataRowComponent } from './empty-data-row/empty-data-row.component';
 
 @NgModule({
   declarations: [
     DetalleExpedienteComponent,
+    EmptyDataRowComponent,
     FormCaseFileComponent,
     FormUpdateCaseFileComponent,
     FormTaskComponent,
@@ -47,6 +49,7 @@ import { SwiperModule } from 'swiper/angular';
   ],
   exports: [
     DetalleExpedienteComponent,
+    EmptyDataRowComponent,
     FormCaseFileComponent,
     FormUpdateCaseFileComponent,
     FormTaskComponent,
